@@ -1,12 +1,12 @@
 <script setup>
-import Gear from './icons/Gear.vue';
+import Gear from '../icons/Gear.vue';
 import SearchBar from './SearchBar.vue';
 </script>
 
 <template>
   <div class="container">
     <SearchBar />
-    <div>
+    <div class="topBtn">
       <Gear />
     </div>
   </div>
@@ -19,6 +19,7 @@ import SearchBar from './SearchBar.vue';
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  max-width: 48%;
 }
 </style>
 

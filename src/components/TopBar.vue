@@ -1,6 +1,6 @@
 <script setup>
-import LeftOptions from './TopOptions.vue'
-import RightOptions from './RightOptions.vue'
+import LeftOptions from './topBar/LeftOptions.vue'
+import RightOptions from './topBar/RightOptions.vue'
 
 function hideLeftBar() {
 
@@ -19,7 +19,8 @@ function hideLeftBar() {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 6px;
+  justify-content: space-around;
+  padding: 6px 0px 6px 0px ;
+  border-bottom: 1px solid #a1a1a1;
 }
 </style>

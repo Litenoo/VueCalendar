@@ -1,5 +1,5 @@
 <script setup>
-import Bars from './icons/Bars.vue'
+import Bars from '../icons/Bars.vue'
 
 function hideLeftBar() {
   console.log('Hide left bar')

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import LeftArr from './icons/LeftArrow.vue'
-import RightArr from './icons/RightArrow.vue'
+import LeftArr from '../icons/LeftArrow.vue'
+import RightArr from '../icons/RightArrow.vue'
 
 
 const selectedDate = ref('25 February 2024')
@@ -9,10 +9,10 @@ const selectedDate = ref('25 February 2024')
 
 <template>
   <div id="nawArrows">
-    <div class="arrow">
+    <div class="topBtn">
       <LeftArr />
     </div>
-    <div class="arrow">
+    <div class="topBtn">
       <RightArr />
     </div>
   </div>
@@ -24,18 +24,16 @@ const selectedDate = ref('25 February 2024')
   display: flex;
   padding-top: 3px;
 }
-.arrow {
-  widows: 30px;
+.topBtn{
   transition: 0.1s;
-  padding: 8px;
 }
-.arrow:hover {
+.topBtn:hover {
   transition: 0.1s;
   background-color: #d3d3d3;
   cursor: pointer;
   border-radius: 12px;
 }
-.arrow:active {
+.topBtn:active {
   transition: 0.1s;
   background-color: #c4c4c4;
   cursor: pointer;

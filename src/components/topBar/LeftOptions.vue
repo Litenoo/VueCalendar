@@ -18,5 +18,6 @@ import Navigation from './Nav.vue'
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  max-width: 44%;
 }
 </style>

@@ -1,14 +1,26 @@
 <script setup>
-import TopBar from './components/TopBar.vue';
+import TopBar from './components/TopBar.vue'
+import LeftBar from './components/LeftBar.vue'
+import Calendar from './components/Calendar.vue'
 </script>
 
 <template>
-  <TopBar />
+  <div id="app">
+    <TopBar />
+    <div id="mainContent">
+      <LeftBar />
+      <Calendar />
+    </div>
+  </div>
 </template>
 
 <style scoped>
-body{
-  font-family: 'Roboto', 'Sans-serif';
-  color: #505050;
+#mainContent {
+  display: flex;
+  flex-direction: row;
+  /* height: 100%; something wrong here :P*/
+}
+#app{
+  height: 100vh;
 }
 </style>
