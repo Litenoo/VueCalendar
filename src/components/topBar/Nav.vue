@@ -29,13 +29,13 @@ const selectedDate = ref('25 February 2024')
 }
 .topBtn:hover {
   transition: 0.1s;
-  background-color: #d3d3d3;
+  background-color: #f1f1f1;
   cursor: pointer;
   border-radius: 12px;
 }
 .topBtn:active {
   transition: 0.1s;
-  background-color: #c4c4c4;
+  background-color: #e6e6e6;
   cursor: pointer;
   border-radius: 14px;
 }

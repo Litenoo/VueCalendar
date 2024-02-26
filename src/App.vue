@@ -18,9 +18,10 @@ import Calendar from './components/Calendar.vue'
 #mainContent {
   display: flex;
   flex-direction: row;
-  /* height: 100%; something wrong here :P*/
+  height: 100%;
 }
 #app{
   height: 100vh;
+  overflow: hidden;
 }
 </style>

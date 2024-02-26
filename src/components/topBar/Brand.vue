@@ -33,13 +33,13 @@ function hideLeftBar() {
 
 .topOption:hover {
   padding: 5px;
-  background-color: #d3d3d3;
+  background-color: #f1f1f1;
   cursor: pointer;
   border-radius: 16px;
 }
 .topOption:active {
   transition: 0.06s;
-  background-color: #c4c4c4;
+  background-color: #e6e6e6;
   border-radius: 20px;
 }
 </style>
