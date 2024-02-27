@@ -27,9 +27,33 @@ body {
   padding: 6px;
 }
 button{
-  background-color: #03af84;
   border: none;
   border-radius: 8px;
   padding: 6px;
   color: white;
+}
+
+#nawArrows {
+  display: flex;
+  padding-top: 2px;
+}
+.topBtn{
+  transition: 0.1s;
+}
+.topBtn:hover {
+  transition: 0.1s;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 12px;
+}
+.topBtn:active {
+  transition: 0.1s;
+  background-color: #e6e6e6;
+  cursor: pointer;
+  border-radius: 14px;
+}
+#selectedDate{
+  color: #505050;
+  font-weight: 400;
+  text-align: center;
 }

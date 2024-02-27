@@ -7,7 +7,9 @@ import Navigation from './Nav.vue'
 <template>
   <div class="container">
     <Brand />
-    <Navigation />
+    <div class="container">
+      <Navigation :navClass="'topBtn'"/>
+    </div>
   </div>
 </template>
 

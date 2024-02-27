@@ -17,6 +17,7 @@ import Search from '../icons/Search.vue';
   justify-content: flex-end;
   padding: 3px;
   border-radius: 15px;
+  width: 60%;
 }
 
 #searchBar input {
@@ -26,6 +27,7 @@ import Search from '../icons/Search.vue';
   outline: none;
   margin: 0px 10px 0px 10px;
   text-align: center;
+  width: 100%;
 }
 
 #searchBar input:focus {

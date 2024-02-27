@@ -5,7 +5,9 @@ import SearchBar from './SearchBar.vue';
 
 <template>
   <div class="container">
-    <SearchBar />
+    <div id="searchBarContainer">
+      <SearchBar />
+    </div>
     <div class="topBtn">
       <Gear />
     </div>
@@ -13,13 +15,16 @@ import SearchBar from './SearchBar.vue';
 </template>
 
 <style>
-.container{
+.container {
   flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   max-width: 48%;
+}
+#searchBarContainer{
+  width: 80%;
 }
 </style>
 

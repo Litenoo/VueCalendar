@@ -19,7 +19,7 @@ function hideLeftBar() {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 6px 0px 6px 0px ;
   border-bottom: 1px solid #a1a1a1;
 }

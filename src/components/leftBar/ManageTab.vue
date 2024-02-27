@@ -1,21 +1,28 @@
 <script setup>
 import Plus from '../icons/Plus.vue'
+import Minus from '../icons/Minus.vue'
+import TaskView from './TaskView.vue'
 </script>
 
 <template>
   <div>
-    <button class="option"> <Plus />Add new</button>
+    <button class="option"> <Plus :fill="'#505050'" :height="'26'" />Add new</button>
+    <button class="option"> <Minus :fill="'#505050'" :height="'26'" />Delete</button>
+    <TaskView />
   </div>
 </template>
 
 <style>
 .option{
+  background-color: #fff;
+  color: #000;
   display: flex;
-  flex-direction: row;
+  padding: 1px 6px;
+  margin: 4px;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-  border: 1px solid #b4b4b4;
-  padding: 4px;
-  min-width: 90px;
+}
+.option * {
+  padding: 0px 5px 0px 5px;
 }
 </style>

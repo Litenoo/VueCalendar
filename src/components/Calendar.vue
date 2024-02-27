@@ -8,7 +8,7 @@
 </template>
 <style>
 #calendar{
-  flex: 12;
+  flex: 11;
   padding: 4px;
 }
 </style>
