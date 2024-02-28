@@ -15,6 +15,6 @@ import ManageTab from './leftBar/ManageTab.vue'
   border-right: 1px solid #c4c4c4;
   width: 210px;
   flex: 3;
-  max-width: 300px;
+  max-width: 250px;
 }
 </style>
