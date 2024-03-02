@@ -1,7 +1,7 @@
 <script setup>
 
 import Nav from '../topBar/Nav.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -11,13 +11,16 @@ const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 const props = defineProps({
   currentCalendar: Object,
 })
-const emit = defineEmits(['change'])
+const emit = defineEmits(['updateCalendar']);
 
-console.dir(props.currentCalendar)
+watch(()=>{
+  return props.currentCalendar;
+}, (newCalendar)=>{
+  console.log('current calendar changed !');
+  calendar = createCalendar(newCalendar.year, newCalendar.month);
+})
 
 let today = props.currentCalendar;
-
-
 
 function createCalendar(year, month) { //Check if its 100% okay and clear;
   console.log('finding date with : ', year , '- -', month)
@@ -56,6 +59,10 @@ function createCalendar(year, month) { //Check if its 100% okay and clear;
   }
   return calendar;
 }
+let currentDispDate = ref(props.currentCalendar.month);
+function handleUpdateCalendar(value){
+  emit('updateCalendar', value)
+}
 
 let calendar = createCalendar(props.currentCalendar.year, props.currentCalendar.month);
 </script>
@@ -63,7 +70,7 @@ let calendar = createCalendar(props.currentCalendar.year, props.currentCalendar.
 <template>
   <div id="miniCalendar">
     <div id="calendarTop">
-      <Nav size="12" />
+      <Nav size="12" @updateCalendarState="handleUpdateCalendar" :dateToDisplay="currentDispDate"/>
     </div>
     <div id="weekDays"><span v-for="weekDay in daysNames" class="miniDay">{{ weekDay }}</span></div>
     <div id="miniDays">

@@ -3,18 +3,32 @@ import { ref } from 'vue';
 import MiniCalendar from './leftBar/MiniCalendar.vue';
 import ManageTab from './leftBar/ManageTab.vue';
 
-function getCurrentDate() {
-  const date = new Date();
-  return { year: date.getFullYear(), month: date.getMonth(), weekDay: date.getDay(), monthDay:date.getDate() };
+function getDate(year, month) {
+  const date = new Date(year, month);
+  return { year: date.getFullYear(), month: date.getMonth(), weekDay: date.getDay(), monthDay: date.getDate() };
 }
 
-const currentDate = ref(getCurrentDate());
+function updateCalendarState(year, month) {
+  currentDate.value = getDate(year, month);
+}
+
+function handleUpdateCalendar(value){
+  console.log('subtracting month to : ', value)
+  month = month + value;
+  updateCalendarState(2024, month);
+}
+
+const onceDate = new Date();
+let month = onceDate.getMonth()
+let currentDate = ref(getDate(onceDate.getFullYear(), month));
+
+
 </script>
 
 <template>
   <div id="leftBar">
-    <MiniCalendar :currentCalendar="currentDate" />
-    <ManageTab />
+    <MiniCalendar :currentCalendar="currentDate" @updateCalendar="handleUpdateCalendar"/>
+    <ManageTab/>
   </div>
 </template>
 

@@ -12,10 +12,10 @@ const props = defineProps({
 <template>
   <div id="nawArrows">
     <div class="topBtn">
-      <LeftArr :height="size || 18" />
+      <LeftArr :height="size || 18" @click="$emit('updateCalendarState', -1)"/>
     </div>
     <div class="topBtn">
-      <RightArr :height="size || 18"/>
+      <RightArr :height="size || 18" @click="$emit('updateCalendarState', 1)"/>
     </div>
   </div>
   <span id="selectedDate" :font-size="size || 25">27 February</span>
