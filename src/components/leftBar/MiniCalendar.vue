@@ -1,22 +1,26 @@
 <script setup>
 
 import Nav from '../topBar/Nav.vue';
-import {ref, computed} from 'vue';
+import { ref, computed } from 'vue';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-let currentDate = getCurrentDate();
-let today = currentDate.day;
+const props = defineProps({
+  currentCalendar: Object,
+})
+const emit = defineEmits(['change'])
 
-function getCurrentDate() {
-  const date = new Date();
-  return {year:date.getFullYear(), month:date.getMonth(), day:date.getDay()};
-}
+console.dir(props.currentCalendar)
 
-function createCalendar(year, month) {
+let today = props.currentCalendar;
+
+
+
+function createCalendar(year, month) { //Check if its 100% okay and clear;
+  console.log('finding date with : ', year , '- -', month)
 
   function getTotalDays(year, month) {
     const lastDay = new Date(year, month, 0);
@@ -25,36 +29,35 @@ function createCalendar(year, month) {
 
   const calendar = [];
 
-  const monthLength = getTotalDays(year, month);
+  let monthLength = getTotalDays(year, month);
   let beforeMonthLength = getTotalDays(year, month - 1);
+
+  console.log(monthLength)
+  console.log(beforeMonthLength)
 
   const currentDate = new Date();
   currentDate.setDate(1);
   let startDay = currentDate.getDay();
 
-  for (let i = 0; i < startDay - 1; startDay--, beforeMonthLength--) {
-      calendar.unshift({day : beforeMonthLength, today: false});
+  for (let i = 0; i < startDay - 1; startDay--, monthLength--) {
+    calendar.unshift({ day: monthLength, today: false });
   }
-  for (let i = 1; i <= monthLength; i++) {
-    if(today === i && currentDate.day && currentDate.month === month, currentDate.year === year){
-      calendar.push({day : i, today: true});
-    }else{
-      calendar.push({day : i, today: false});
+  for (let i = 1; i <= beforeMonthLength; i++) {
+    if (today === i && currentDate.day && currentDate.month === month, currentDate.year === year) {
+      calendar.push({ day: i, today: true });
+    } else {
+      calendar.push({ day: i, today: false });
     }
   }
   let i = 1;
   while (calendar.length < 42) {
-    calendar.push({day:i, today:false});
+    calendar.push({ day: i, today: false });
     i++;
   }
   return calendar;
 }
 
-let calendar = createCalendar(currentDate.year, currentDate.year);
-
-const calendarValid = computed(()=>{
-
-})
+let calendar = createCalendar(props.currentCalendar.year, props.currentCalendar.month);
 </script>
 
 <template>
@@ -62,7 +65,7 @@ const calendarValid = computed(()=>{
     <div id="calendarTop">
       <Nav size="12" />
     </div>
-    <div id="weekDays"><span v-for="weekDay in daysNames" class="miniDay" >{{ weekDay }}</span></div>
+    <div id="weekDays"><span v-for="weekDay in daysNames" class="miniDay">{{ weekDay }}</span></div>
     <div id="miniDays">
       <div v-for="day in calendar" class="miniDay">
         <span class="mini-calendar__day">{{ day.day }}</span>
