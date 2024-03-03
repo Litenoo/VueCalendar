@@ -13,14 +13,13 @@ function updateCalendarState(year, month) {
 }
 
 function handleUpdateCalendar(value){
-  console.log('subtracting month to : ', value)
-  month = month + value;
-  updateCalendarState(2024, month);
+  globalMonth = globalMonth + value;
+  updateCalendarState(2024, globalMonth);
 }
 
 const onceDate = new Date();
-let month = onceDate.getMonth()
-let currentDate = ref(getDate(onceDate.getFullYear(), month));
+let globalMonth = onceDate.getMonth() -1;
+let currentDate = ref(getDate(onceDate.getFullYear(), globalMonth));
 
 
 </script>

@@ -3,55 +3,32 @@
 import Nav from '../topBar/Nav.vue';
 import { ref, computed, watch } from 'vue';
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-
-const props = defineProps({
-  currentCalendar: Object,
-})
-const emit = defineEmits(['updateCalendar']);
-
-watch(()=>{
-  return props.currentCalendar;
-}, (newCalendar)=>{
-  console.log('current calendar changed !');
-  calendar = createCalendar(newCalendar.year, newCalendar.month);
-})
-
-let today = props.currentCalendar;
-
-function createCalendar(year, month) { //Check if its 100% okay and clear;
-  console.log('finding date with : ', year , '- -', month)
-
-  function getTotalDays(year, month) {
-    const lastDay = new Date(year, month, 0);
-    return lastDay.getDate();
+function createCalendar(year, month) {
+  function getTotalDays(yr, mnt) {
+    const lastDay = new Date(yr, mnt + 1, 0).getDate();
+    return lastDay;
   }
 
   const calendar = [];
 
+  const currentDate = new Date(year, month);
+  let startDay = currentDate.getDay();
+
   let monthLength = getTotalDays(year, month);
   let beforeMonthLength = getTotalDays(year, month - 1);
 
-  console.log(monthLength)
-  console.log(beforeMonthLength)
-
-  const currentDate = new Date();
-  currentDate.setDate(1);
-  let startDay = currentDate.getDay();
-
-  for (let i = 0; i < startDay - 1; startDay--, monthLength--) {
-    calendar.unshift({ day: monthLength, today: false });
+  for (let i = 0; i < startDay - 1; startDay--, beforeMonthLength--) {
+    calendar.unshift({ day: beforeMonthLength, today: false });
   }
-  for (let i = 1; i <= beforeMonthLength; i++) {
+
+  for (let i = 1; i <= monthLength; i++) {
     if (today === i && currentDate.day && currentDate.month === month, currentDate.year === year) {
       calendar.push({ day: i, today: true });
     } else {
       calendar.push({ day: i, today: false });
     }
   }
+
   let i = 1;
   while (calendar.length < 42) {
     calendar.push({ day: i, today: false });
@@ -59,18 +36,43 @@ function createCalendar(year, month) { //Check if its 100% okay and clear;
   }
   return calendar;
 }
-let currentDispDate = ref(props.currentCalendar.month);
-function handleUpdateCalendar(value){
-  emit('updateCalendar', value)
+
+function handleUpdateCalendar(value) {
+  emit('updateCalendar', value);
 }
 
-let calendar = createCalendar(props.currentCalendar.year, props.currentCalendar.month);
+const props = defineProps({
+  currentCalendar: Object,
+});
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+
+const emit = defineEmits(['updateCalendar']);
+
+let today = props.currentCalendar;
+let currentDispDate = ref(`${monthNames[props.currentCalendar.month]} ${props.currentCalendar.year}`);
+let calendar = createCalendar(2024, 1);
+
+watch(() => {
+  return props.currentCalendar;
+}, (newCalendar) => {
+  calendar = createCalendar(newCalendar.year, newCalendar.month);
+});
+watch(() => {
+  return props.currentCalendar.month;
+}, (newMonth) => {
+  currentDispDate = `${monthNames[newMonth]} ${props.currentCalendar.year}`;
+});
+
 </script>
 
 <template>
   <div id="miniCalendar">
     <div id="calendarTop">
-      <Nav size="12" @updateCalendarState="handleUpdateCalendar" :dateToDisplay="currentDispDate"/>
+      <Nav size=12 @updateCalendarState="handleUpdateCalendar" :dateToDisplay="currentDispDate" />
     </div>
     <div id="weekDays"><span v-for="weekDay in daysNames" class="miniDay">{{ weekDay }}</span></div>
     <div id="miniDays">

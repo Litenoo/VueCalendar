@@ -3,9 +3,9 @@ import { ref } from 'vue';
 import LeftArr from '../icons/LeftArrow.vue'
 import RightArr from '../icons/RightArrow.vue'
 
-
 const props = defineProps({
   size: Number,
+  dateToDisplay: String,
 })
 </script>
 
@@ -18,5 +18,5 @@ const props = defineProps({
       <RightArr :height="size || 18" @click="$emit('updateCalendarState', 1)"/>
     </div>
   </div>
-  <span id="selectedDate" :font-size="size || 25">27 February</span>
+  <span id="selectedDate" :font-size="size || 25" >{{dateToDisplay}}</span>
 </template>
