@@ -4,7 +4,7 @@ import Brand from './Brand.vue';
 import Navigation from './Nav.vue';
 
 function handleUpdateCalendar(value){
-  console.log('updateCalendar executed in leftoptions ! With value : ', value)
+  console.log('updateCalendar executed in leftoptions ! With value : ', value);
 }
 </script>
 
