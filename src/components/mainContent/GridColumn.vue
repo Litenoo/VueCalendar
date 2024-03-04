@@ -23,7 +23,6 @@
     <div></div>
     <div></div>
     <div></div>
-    <div></div>
   </div>
 </template>
 
@@ -33,7 +32,7 @@
   flex-direction: column;
 }
 .column div{
-  height: 40px;
+  height: 46px;
   border-bottom: 1px solid #d1d1d1;
   border-right: 1px solid #d1d1d1;
   box-sizing: border-box;
