@@ -7,7 +7,14 @@
       </div>
     </div>
     <div id="mainGrid">
-      <HoursColumn />
+      <HoursColumn /> 
+      <!-- Instead of GridColumn moultiple times make v-for -->
+      <GridColumn />
+      <GridColumn />
+      <GridColumn />
+      <GridColumn />
+      <GridColumn />
+      <GridColumn />
       <GridColumn />
     </div>
   </div>
@@ -17,13 +24,21 @@
 import GridColumn from './GridColumn.vue';
 import HoursColumn from './HoursDisplay.vue';
 
+let dayInfo = { monthDay: 1, weekDay: 'Friday' };
+
 const days = [
 { monthDay: 1, weekDay: 'Friday' }, 
+{ monthDay: 2, weekDay: 'Saturday' }, 
+{ monthDay: 3, weekDay: 'Sunday' }, 
+{ monthDay: 4, weekDay: 'Monday' }, 
+{ monthDay: 5, weekDay: 'Wednsday' }, 
+{ monthDay: 6, weekDay: 'Tuesday' }, 
+{ monthDay: 7, weekDay: 'Thursday' }, 
 ]
 </script>
 
-<style scoped>
-/* Move CSS from here */
+<style scoped> 
+/* move all CSS to global. Do the same in ./Day.vue */
 #grid {
   display: grid;
   grid-column: 1;
@@ -32,19 +47,19 @@ const days = [
 }
 
 #mainGrid {
-  display: grid;
   overflow-y: scroll;
-  border-bottom: 1px solid #d1d1d1;
   height: calc(100vh - 112px);
-  grid-template-columns: 20px 1fr;
+  display: grid;
+  grid-template-columns: 20px repeat(7, 1fr);
+  border-bottom: 1px solid #d1d1d1;
 }
 
 .columnGrid {
   display: flex;
-  border-bottom: 1px solid #d1d1d1;
   grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid #d1d1d1;
   padding: 5px 5px 0px 0px;
-  margin: 0px 13px 0px 22px;
+  margin: 0px 12px 0px 20px;
 }
 
 .column {
@@ -52,10 +67,10 @@ const days = [
 }
 
 .dayName {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
 }
 
 .monthDay {

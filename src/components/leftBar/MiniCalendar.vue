@@ -97,40 +97,40 @@ watch(() => {
 
 #miniDays {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
+  flex-wrap: wrap;
   cursor: pointer;
+  width: 100%;
 }
 
 .miniDay {
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 12px;
+  justify-content: center;
   width: calc(14.2% - 14px);
   min-height: 16px;
   min-width: 13.25px;
   padding: 0 7px;
+  font-size: 12px;
 }
 
 .miniDay span {
-  min-width: 13.25px;
   display: flex;
   justify-content: center;
+  min-width: 13.25px;
 }
 
 .mini-calendar__day {
   transition: 0.4s;
   border-radius: 100%;
   padding: 7px;
-  aspect-ratio: 1/1;
+  /* aspect-ratio: 1/1; -- probably not needed anymore*/
 }
 
 .miniDay:hover .mini-calendar__day {
   background-color: #f1f1f1;
-  transition: 0.2s;
   text-align: center;
+  transition: 0.2s;
 }
 
 .miniDay:hover {
@@ -141,6 +141,6 @@ watch(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 6px 6px 0px;
+  padding: 0 6px 6px 0;
 }
 </style>

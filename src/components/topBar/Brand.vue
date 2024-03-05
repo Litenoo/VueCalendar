@@ -1,8 +1,8 @@
 <script setup>
-import Bars from '../icons/Bars.vue'
+import Bars from '../icons/Bars.vue';
 
 function hideLeftBar() {
-  console.log('Hide left bar')
+  console.log('Hide left bar');
 }
 
 </script>
@@ -23,8 +23,8 @@ function hideLeftBar() {
   align-items: center;
 }
 #brand {
-  font-size: 24px;
   color: #505050;
+  font-size: 24px;
 }
 
 .topOption{
@@ -32,14 +32,14 @@ function hideLeftBar() {
 }
 
 .topOption:hover {
-  padding: 5px;
   background-color: #f1f1f1;
   cursor: pointer;
+  padding: 5px;
   border-radius: 16px;
 }
 .topOption:active {
-  transition: 0.06s;
   background-color: #e6e6e6;
+  transition: 0.06s;
   border-radius: 20px;
 }
 </style>

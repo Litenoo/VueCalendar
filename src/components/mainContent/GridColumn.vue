@@ -1,5 +1,6 @@
 <template>
   <div class="column">
+    <!-- V-for ! -->
     <div></div>
     <div></div>
     <div></div>

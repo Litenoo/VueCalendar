@@ -3,9 +3,9 @@ import Plus from '../icons/Plus.vue';
 import Minus from '../icons/Minus.vue';
 import TaskView from './TaskView.vue';
 
-function updateCalendar(){
+// function updateCalendar(){
 
-}
+// }
 </script>
 
 <template>
@@ -18,13 +18,13 @@ function updateCalendar(){
 
 <style>
 .option{
-  background-color: #fff;
-  color: #000;
   display: flex;
-  padding: 1px 6px;
-  margin: 4px;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  color: #000;
+  margin: 4px;
+  padding: 1px 6px;
 }
 .option * {
   padding: 0px 5px 0px 5px;

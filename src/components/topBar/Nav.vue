@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import LeftArr from '../icons/LeftArrow.vue'
 import RightArr from '../icons/RightArrow.vue'
 

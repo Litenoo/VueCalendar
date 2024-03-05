@@ -16,11 +16,11 @@ import SearchBar from './SearchBar.vue';
 
 <style>
 .container {
-  flex: 1;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row;
+  flex: 1;
   max-width: 48%;
 }
 #searchBarContainer{

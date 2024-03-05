@@ -21,9 +21,9 @@ for (let i = 1; i <= 23; i++) {
   width: 20px;
 }
 #HoursDisplay div{
-  color: #505050;
-  font-size: 12px;
   height: 46px;
+  font-size: 12px;
+  color: #505050;
   text-align: center;
 }
 </style>
