@@ -2,6 +2,7 @@
 
 import WeekGrid from './mainContent/Week.vue';
 import DayGrid from './mainContent/Day.vue';
+import MonthGrid from './mainContent/Month.vue';
 
 </script>
 
