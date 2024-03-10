@@ -1,11 +1,11 @@
 <script setup>
 
-import { ref, computed, watch } from 'vue';
+import { computed, watch } from 'vue';
 import store from '../../store';
 
 function createCalendar(year, month) {
-  console.log('Creating calendar with data : ', store.state.currentDate.year, store.state.currentDate.month)
-  console.log('Creating calendar with data : ', year, month)
+  console.log('Creating calendar with data : ', store.state.currentDate.year, store.state.currentDate.month);
+  console.log('Creating calendar with data : ', year, month);
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -14,12 +14,12 @@ function createCalendar(year, month) {
   const calendar = [];
 
   const currentDate = new Date(year, month);
-  console.log('calendar date :', currentDate)
-  let startDay = currentDate.getDay(); // 5
+  console.log('calendar date :', currentDate);
+  let startDay = currentDate.getDay();
   let today = currentDate.getDate();
 
-  let monthLength = getTotalDays(year, month); // 31
-  let beforeMonthLength = getTotalDays(year, month - 1); // 29
+  let monthLength = getTotalDays(year, month);
+  let beforeMonthLength = getTotalDays(year, month - 1);
 
   for (let i = 0; i < startDay - 1; startDay--, beforeMonthLength--) {
     calendar.unshift({ day: beforeMonthLength, today: false });
@@ -41,29 +41,21 @@ function createCalendar(year, month) {
   return calendar;
 }
 
+const params = defineProps( {
+  globalDisplay:Boolean,
+})
+
 
 const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
 const emit = defineEmits(['updateCalendar']);
 
-// let currentDispDate = ref(`${monthNames[props.currentCalendar.month]} ${props.currentCalendar.year}`);
 let calendar = computed(()=> createCalendar(store.state.currentDate.year, store.state.currentDate.month));
 
-// watch(() => {
-//   return props.currentCalendar;
-// }, (newCalendar) => {
-//   calendar = createCalendar(newCalendar.year, newCalendar.month);
-// });
-// watch(() => {
-//   return props.currentCalendar.month;
-// }, (newMonth) => {
-//   currentDispDate = `${monthNames[newMonth]} ${props.currentCalendar.year}`;
-// });
-
 watch(()=>{
-  return store.state.currentDate.month
+  return store.state.currentDate.month;
 }, ()=>{
-  createCalendar(store.state.currentDate.year, store.state.currentDate.month)
+  createCalendar(store.state.currentDate.year, store.state.currentDate.month);
 })
 
 </script>
@@ -86,6 +78,7 @@ watch(()=>{
 }
 
 #miniCalendar {
+  flex: 1;
   width: calc(100% - 18px);
   min-height: 120px;
   padding: 9px;
@@ -120,7 +113,6 @@ watch(()=>{
   transition: 0.4s;
   border-radius: 100%;
   padding: 7px;
-  /* aspect-ratio: 1/1; -- probably not needed anymore*/
 }
 
 .miniDay:hover .mini-calendar__day {

@@ -56,4 +56,13 @@ button{
   color: #505050;
   font-weight: 400;
   text-align: center;
+  overflow: visible;
+  min-width: 180px;
+}
+.navContent{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 10px;
+  width: 70%;
 }

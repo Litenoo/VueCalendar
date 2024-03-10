@@ -1,8 +1,7 @@
 <script setup>
-import { ref } from 'vue';
 import MiniCalendar from './leftBar/MiniCalendar.vue';
-import ManageTab from './leftBar/ManageTab.vue';
 import Nav from './topBar/Nav.vue';
+import ViewSelect from './leftBar/ViewSelect.vue';
 
 function getDate(year, month) {
   const date = new Date(year, month);
@@ -13,14 +12,8 @@ function updateCalendarState(year, month) {
   currentDate.value = getDate(year, month);
 }
 
-// function handleUpdateCalendar(value){
-//   globalMonth = globalMonth + value;
-//   updateCalendarState(2024, globalMonth);
-// }
 
 const onceDate = new Date();
-let globalMonth = onceDate.getMonth() -1;
-// let currentDate = ref(getDate(onceDate.getFullYear(), globalMonth));
 
 
 </script>
@@ -28,8 +21,8 @@ let globalMonth = onceDate.getMonth() -1;
 <template>
   <div id="leftBar">
     <Nav />
-    <MiniCalendar />
-    <ManageTab/>
+    <MiniCalendar globalDisplay />
+    <ViewSelect />
   </div>
 </template>
 

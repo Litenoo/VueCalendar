@@ -1,0 +1,23 @@
+<script setup>
+import store from '../../store';
+import { ref, watch } from 'vue';
+
+const viewMode = ref('Week')
+
+watch(()=>{
+  console.log('changed viewmode : ', viewMode.value)
+  return viewMode.value;
+}, ()=>{
+  store.commit("updateViewmode", viewMode)
+})
+
+</script>
+
+<template>
+  <select name="selectView" id="selectView" v-model="viewMode">
+    <option>One-day</option>
+    <option>Week</option>
+    <option>Month</option>
+    <option>Year</option>
+  </select>
+</template>
