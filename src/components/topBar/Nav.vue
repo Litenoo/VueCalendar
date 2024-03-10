@@ -6,16 +6,28 @@ import { computed } from 'vue';
 
 function increment() {
   if (props.global) {
-    store.commit('increment', false);
-  }else{
-    store.commit('increment', true);
+    store.commit('incrementMonth', false);
+  } else if (store.state.currentDate.view === 'One-day') {
+    store.commit("incrementDay");
+  } else if (store.state.currentDate.view === 'Week') {
+    store.commit("incrementWeek");
+  } else if (store.state.currentDate.view === 'Year') {
+    store.commit("incrementYear");
+  } else {
+    store.commit('incrementMonth', true);
   }
 }
 function decrement() {
   if (props.global) {
-    store.commit('decrement', false);
-  }else{
-    store.commit('decrement', true);
+    store.commit('decrementMonth', false);
+  } else if (store.state.currentDate.view === 'One-day') {
+    store.commit("decrementDay");
+  } else if (store.state.currentDate.view === 'Week') {
+    store.commit("decrementWeek");
+  } else if (store.state.currentDate.view === 'Year') {
+    store.commit("decrementYear");
+  } else {
+    store.commit('decrementMonth', true);
   }
 }
 
@@ -52,6 +64,11 @@ if (props.global) {
         <RightArr :height="size || 18" @click="increment" />
       </div>
     </div>
-    <span id="selectedDate" :font-size="size || 25">{{ dateToDisplay }} {{ yearToDisplay }}</span>
+    <span id="selectedDate" :font-size="size || 25">
+      <span v-if="store.state.currentDate.view !== 'Year' && !props.global || props.global">
+        {{ dateToDisplay }}
+      </span>
+      {{ yearToDisplay }}
+    </span>
   </div>
 </template>

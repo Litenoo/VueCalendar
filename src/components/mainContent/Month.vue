@@ -98,4 +98,5 @@ watch(() => {
   make day widget display work
   make widget change depending on which will user select
   make week widget display
+  There is an error on year display when counter will run out of current year 
 -->

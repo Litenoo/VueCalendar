@@ -2,7 +2,7 @@
 import store from '../../store';
 import { ref, watch } from 'vue';
 
-const viewMode = ref('Week')
+const viewMode = ref('Month')
 
 watch(()=>{
   return viewMode.value;
