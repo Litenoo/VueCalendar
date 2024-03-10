@@ -5,24 +5,40 @@ const date = new Date()
 const store = createStore({
   state() {
     return {
-      currentDate: { month: date.getMonth(), year: date.getFullYear(), weekDay: null, view: 'Week' },
+      currentDate: { viewMonth: date.getMonth(), month: date.getMonth(), year: date.getFullYear(), weekDay: null, view: 'Week' },
     }
   },
   mutations: {
-    increment(state) {
+    increment(state, global) {
       if (state.currentDate.month === 11) {
-        state.currentDate.year++;
-        state.currentDate.month = 0;
+        state.currentDate.year++; // probably need to change year too 
+        if (global) {
+          state.currentDate.viewMonth = 0;
+        } else {
+          state.currentDate.month = 0;
+        }
       } else {
-        state.currentDate.month++;
+        if (global) {
+          state.currentDate.viewMonth++;
+        } else {
+          state.currentDate.month++;
+        }
       }
     },
-    decrement(state) {
+    decrement(state, global) {
       if (state.currentDate.month === 0) {
-        state.currentDate.year--;
-        state.currentDate.month = 11;
+        state.currentDate.year--; // probably need to change year too 
+        if (global) {
+          state.currentDate.viewMonth = 11;
+        } else {
+          state.currentDate.month = 11;
+        }
       } else {
-        state.currentDate.month--;
+        if (global) {
+          state.currentDate.viewMonth--;
+        } else {
+          state.currentDate.month--;
+        }
       }
     },
     setDate(state, newWeekday) {

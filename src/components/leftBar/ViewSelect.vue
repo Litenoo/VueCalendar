@@ -5,7 +5,6 @@ import { ref, watch } from 'vue';
 const viewMode = ref('Week')
 
 watch(()=>{
-  console.log('changed viewmode : ', viewMode.value)
   return viewMode.value;
 }, ()=>{
   store.commit("updateViewmode", viewMode)

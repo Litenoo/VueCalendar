@@ -4,8 +4,6 @@ import { computed, watch } from 'vue';
 import store from '../../store';
 
 function createCalendar(year, month) {
-  console.log('Creating calendar with data : ', store.state.currentDate.year, store.state.currentDate.month);
-  console.log('Creating calendar with data : ', year, month);
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -14,7 +12,6 @@ function createCalendar(year, month) {
   const calendar = [];
 
   const currentDate = new Date(year, month);
-  console.log('calendar date :', currentDate);
   let startDay = currentDate.getDay();
   let today = currentDate.getDate();
 
@@ -41,8 +38,9 @@ function createCalendar(year, month) {
   return calendar;
 }
 
-const params = defineProps( {
-  globalDisplay:Boolean,
+const params = defineProps({
+  globalDisplay: Boolean,
+  month: Number,
 })
 
 
@@ -50,20 +48,25 @@ const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
 const emit = defineEmits(['updateCalendar']);
 
-let calendar = computed(()=> createCalendar(store.state.currentDate.year, store.state.currentDate.month));
+let calendar;
 
-watch(()=>{
-  return store.state.currentDate.month;
-}, ()=>{
-  createCalendar(store.state.currentDate.year, store.state.currentDate.month);
-})
+if (params.globalDisplay) {
+  calendar = computed(() => createCalendar(store.state.currentDate.year, store.state.currentDate.month));
+  watch(() => {
+    return store.state.currentDate.month;
+  }, () => {
+    createCalendar(store.state.currentDate.year, store.state.currentDate.month);
+  })
+} else {
+  calendar = computed(() => createCalendar(store.state.currentDate.year, params.month));
+}
 
 </script>
 
 <template>
   <div id="miniCalendar">
     <div id="weekDays"><span v-for="weekDay in daysNames" class="miniDay">{{ weekDay }}</span></div>
-    <div id="miniDays"> 
+    <div id="miniDays">
       <div v-for="day in calendar" class="miniDay">
         <span class="mini-calendar__day">{{ day.day }}</span>
       </div>

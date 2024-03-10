@@ -4,8 +4,6 @@ import { computed, watch } from 'vue';
 import store from '../../store';
 
 function createCalendar(year, month) {
-  console.log('Creating calendar with data : ', store.state.currentDate.year, store.state.currentDate.month);
-  console.log('Creating calendar with data : ', year, month);
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -14,7 +12,6 @@ function createCalendar(year, month) {
   const calendar = [];
 
   const currentDate = new Date(year, month);
-  console.log('calendar date :', currentDate);
   let startDay = currentDate.getDay();
   let today = currentDate.getDate();
 
@@ -47,12 +44,12 @@ function updateWeekday(weekDay) {
 
 const emit = defineEmits(['updateCalendar']);
 
-let calendar = computed(() => createCalendar(store.state.currentDate.year, store.state.currentDate.month));
+let calendar = computed(() => createCalendar(store.state.currentDate.year, store.state.currentDate.viewMonth));
 
 watch(() => {
-  return store.state.currentDate.month;
+  return store.state.currentDate.viewMonth;
 }, () => {
-  createCalendar(store.state.currentDate.year, store.state.currentDate.month);
+  createCalendar(store.state.currentDate.year, store.state.currentDate.viewMonth);
 })
 
 </script>
