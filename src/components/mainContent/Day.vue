@@ -16,9 +16,12 @@
 <script setup>
 import GridColumn from './GridColumn.vue';
 import HoursColumn from './HoursDisplay.vue';
+import store from '../../store';
+import { computed } from 'vue';
+
 
 const days = [
-{ monthDay: 1, weekDay: 'Friday' }, 
+{ monthDay: computed(()=> store.state.currentDate.day), weekDay: 'Friday' }, 
 ]
 </script>
 
