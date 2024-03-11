@@ -1,13 +1,48 @@
+<script setup>
+import GridColumn from './GridColumn.vue';
+import HoursColumn from './HoursDisplay.vue';
+import store from '../../store';
+import { computed, toRaw, isProxy } from 'vue';
+
+let weekDaysN = computed(()=> {
+  console.log('computedCalled !')
+  let rawData = store.state.currentDate.weekDisplay;
+  rawData = toRaw(rawData)
+  let res = []
+  for(let i = 0; i < 6; i++){
+    res.push(rawData[i]);
+  }
+  return res;
+})
+
+function weekDay(){
+  setInterval(()=>{console.log(weekDaysN.value)}, 2000)
+}
+
+weekDay();
+
+
+const days = [
+  { monthDay: 1, weekDay: 'Friday' },
+  { monthDay: 2, weekDay: 'Saturday' },
+  { monthDay: 3, weekDay: 'Sunday' },
+  { monthDay: 4, weekDay: 'Monday' },
+  { monthDay: 5, weekDay: 'Wednsday' },
+  { monthDay: 6, weekDay: 'Tuesday' },
+  { monthDay: 7, weekDay: 'Thursday' },
+]
+</script>
+
 <template>
   <div id="gridContainer">
     <div class="columnGrid">
-      <div class="dayName" v-for="day in days">
-        <span class="monthDay">{{ day.monthDay }}</span>
-        <span class="weekDay">{{ day.weekDay }}</span>
+      <div class="dayName" v-for="day in weekDaysN">
+        <span class="monthDay">{{ day }}</span>
+        <!-- <span class="weekDay">{{ day.weekDay }}</span> -->
       </div>
     </div>
     <div id="mainGrid">
-      <HoursColumn /> 
+      <HoursColumn />
       <!-- Instead of GridColumn moultiple times make v-for -->
       <GridColumn />
       <GridColumn />
@@ -20,24 +55,7 @@
   </div>
 </template>
 
-<script setup>
-import GridColumn from './GridColumn.vue';
-import HoursColumn from './HoursDisplay.vue';
-
-let dayInfo = { monthDay: 1, weekDay: 'Friday' };
-
-const days = [
-{ monthDay: 1, weekDay: 'Friday' }, 
-{ monthDay: 2, weekDay: 'Saturday' }, 
-{ monthDay: 3, weekDay: 'Sunday' }, 
-{ monthDay: 4, weekDay: 'Monday' }, 
-{ monthDay: 5, weekDay: 'Wednsday' }, 
-{ monthDay: 6, weekDay: 'Tuesday' }, 
-{ monthDay: 7, weekDay: 'Thursday' }, 
-]
-</script>
-
-<style scoped> 
+<style scoped>
 /* move all CSS to global. Do the same in ./Day.vue */
 #grid {
   display: grid;

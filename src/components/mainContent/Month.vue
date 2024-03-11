@@ -3,7 +3,7 @@
 import { computed, watch } from 'vue';
 import store from '../../store';
 
-function createCalendar(year, month) {
+function createCalendar(year, month) { //When go to 2023 (october for example its not displayed correct.)
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -17,6 +17,10 @@ function createCalendar(year, month) {
 
   let monthLength = getTotalDays(year, month);
   let beforeMonthLength = getTotalDays(year, month - 1);
+
+  if(startDay === 1){ //check if there is better way to occure that case
+    startDay = 6;
+  }
 
   for (let i = 0; i < startDay - 1; startDay--, beforeMonthLength--) {
     calendar.unshift({ day: beforeMonthLength, today: false });

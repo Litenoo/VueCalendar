@@ -1,3 +1,16 @@
+<script setup>
+import GridColumn from './GridColumn.vue';
+import HoursColumn from './HoursDisplay.vue';
+import store from '../../store';
+import { computed } from 'vue';
+
+
+const days = [
+{ monthDay: computed(()=> store.state.currentDate.day), weekDay: 'Friday' }, 
+]
+</script>
+
+
 <template>
   <div id="gridContainer">
     <div class="columnGrid">
@@ -12,18 +25,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import GridColumn from './GridColumn.vue';
-import HoursColumn from './HoursDisplay.vue';
-import store from '../../store';
-import { computed } from 'vue';
-
-
-const days = [
-{ monthDay: computed(()=> store.state.currentDate.day), weekDay: 'Friday' }, 
-]
-</script>
 
 <style scoped>
 /* Move CSS from here */

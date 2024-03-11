@@ -12,13 +12,17 @@ function createCalendar(year, month) {
   const calendar = [];
 
   const currentDate = new Date(year, month);
-  let startDay = currentDate.getDay();
+  let startDay = currentDate.getDay() - 1;
   let today = currentDate.getDate();
 
   let monthLength = getTotalDays(year, month);
   let beforeMonthLength = getTotalDays(year, month - 1);
 
-  for (let i = 0; i < startDay - 1; startDay--, beforeMonthLength--) {
+  if(startDay === -1){ //check if there is better way to occure that case
+    startDay = 6;
+  }
+
+  for (let i = 0; i < startDay; startDay--, beforeMonthLength--) {
     calendar.unshift({ day: beforeMonthLength, today: false });
   }
 
