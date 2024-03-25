@@ -100,4 +100,5 @@ watch(() => {
 
 <!-- 
   There is an error on year display when counter will run out of current year 
+  Change the width so it wonmt display 6 in row when scaled.
 -->

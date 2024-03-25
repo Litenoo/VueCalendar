@@ -4,33 +4,17 @@ import HoursColumn from './HoursDisplay.vue';
 import store from '../../store';
 import { computed, toRaw, isProxy } from 'vue';
 
+store.dispatch("incrementWeek")
+
 let weekDaysN = computed(()=> {
-  console.log('computedCalled !')
   let rawData = store.state.currentDate.weekDisplay;
   rawData = toRaw(rawData)
   let res = []
-  for(let i = 0; i < 6; i++){
+  for(let i = 0; i < 7; i++){
     res.push(rawData[i]);
   }
   return res;
-})
-
-function weekDay(){
-  setInterval(()=>{console.log(weekDaysN.value)}, 2000)
-}
-
-weekDay();
-
-
-const days = [
-  { monthDay: 1, weekDay: 'Friday' },
-  { monthDay: 2, weekDay: 'Saturday' },
-  { monthDay: 3, weekDay: 'Sunday' },
-  { monthDay: 4, weekDay: 'Monday' },
-  { monthDay: 5, weekDay: 'Wednsday' },
-  { monthDay: 6, weekDay: 'Tuesday' },
-  { monthDay: 7, weekDay: 'Thursday' },
-]
+});
 </script>
 
 <template>

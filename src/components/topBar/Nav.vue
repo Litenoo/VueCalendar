@@ -6,28 +6,30 @@ import { computed } from 'vue';
 
 function increment() {
   if (props.global) {
-    store.commit('incrementMonth', false);
+    console.log("month")
+    store.dispatch('incrementMonth', false);
   } else if (store.state.currentDate.view === 'One-day') {
-    store.commit("incrementDay");
+    store.dispatch('incrementDay');
   } else if (store.state.currentDate.view === 'Week') {
-    store.commit("incrementWeek");
+    store.dispatch('incrementWeek');
   } else if (store.state.currentDate.view === 'Year') {
     store.commit("incrementYear");
   } else {
-    store.commit('incrementMonth', true);
+    store.dispatch('incrementMonth', true);
   }
 }
+
 function decrement() {
   if (props.global) {
-    store.commit('decrementMonth', false);
+    store.dispatch('decrementMonth', false);
   } else if (store.state.currentDate.view === 'One-day') {
-    store.commit("decrementDay");
+    store.dispatch('decrementDay');
   } else if (store.state.currentDate.view === 'Week') {
-    store.commit("decrementWeek");
+    store.dispatch('decrementWeek');
   } else if (store.state.currentDate.view === 'Year') {
-    store.commit("decrementYear");
+    store.commit('decrementYear');
   } else {
-    store.commit('decrementMonth', true);
+    store.dispatch('decrementMonth', true);
   }
 }
 

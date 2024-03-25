@@ -9,7 +9,7 @@
 import { ref } from 'vue';
 
 const hours = ref([]);
-for (let i = 1; i <= 23; i++) {
+for (let i = 1; i <= 22; i++) {
   hours.value.push(`${i}`)
 }
 
