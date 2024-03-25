@@ -4,32 +4,17 @@ import RightArr from '../icons/RightArrow.vue';
 import store from '../../store';
 import { computed } from 'vue';
 
-function increment() {
-  if (props.global) {
-    console.log("month")
-    store.dispatch('incrementMonth', false);
-  } else if (store.state.currentDate.view === 'One-day') {
-    store.dispatch('incrementDay');
-  } else if (store.state.currentDate.view === 'Week') {
-    store.dispatch('incrementWeek');
-  } else if (store.state.currentDate.view === 'Year') {
-    store.commit("incrementYear");
-  } else {
-    store.dispatch('incrementMonth', true);
-  }
-}
-
-function decrement() {
-  if (props.global) {
-    store.dispatch('decrementMonth', false);
-  } else if (store.state.currentDate.view === 'One-day') {
-    store.dispatch('decrementDay');
-  } else if (store.state.currentDate.view === 'Week') {
-    store.dispatch('decrementWeek');
-  } else if (store.state.currentDate.view === 'Year') {
-    store.commit('decrementYear');
-  } else {
-    store.dispatch('decrementMonth', true);
+function updateDate(num) {
+  switch (store.state.date.viewMode) {
+    case "One-day":
+      store.dispatch("changeDay", num);
+      break;
+      case "Week":
+        store.dispatch("changeDay", 7*num);
+      break;
+      case "Month":
+      store.dispatch("changeDay", num);
+      break;
   }
 }
 
@@ -47,11 +32,11 @@ let dateToDisplay;
 let yearToDisplay;
 
 if (props.global) {
-  dateToDisplay = computed(() => monthNames[store.state.currentDate.month]);
-  yearToDisplay = computed(() => store.state.currentDate.year);
+  dateToDisplay = computed(() => monthNames[store.state.date.month]);
+  yearToDisplay = computed(() => store.state.date.year);
 } else {
-  dateToDisplay = computed(() => monthNames[store.state.currentDate.viewMonth]);
-  yearToDisplay = computed(() => store.state.currentDate.year);
+  dateToDisplay = computed(() => monthNames[store.state.date.viewMonth]);
+  yearToDisplay = computed(() => store.state.date.year);
 }
 
 </script>
@@ -60,14 +45,14 @@ if (props.global) {
   <div class="navContent">
     <div id="nawArrows">
       <div class="topBtn">
-        <LeftArr :height="size || 18" @click="decrement" />
+        <LeftArr :height="size || 18" @click="updateDate(-1)" />
       </div>
       <div class="topBtn">
-        <RightArr :height="size || 18" @click="increment" />
+        <RightArr :height="size || 18" @click="updateDate(1)" />
       </div>
     </div>
     <span id="selectedDate" :font-size="size || 25">
-      <span v-if="store.state.currentDate.view !== 'Year' && !props.global || props.global">
+      <span v-if="store.state.date.view !== 'Year' && !props.global || props.global">
         {{ dateToDisplay }}
       </span>
       {{ yearToDisplay }}

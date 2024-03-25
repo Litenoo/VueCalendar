@@ -11,9 +11,9 @@ function createCalendar(year, month) {
 
   const calendar = [];
 
-  const currentDate = new Date(year, month);
-  let startDay = currentDate.getDay() - 1;
-  let today = currentDate.getDate();
+  const date = new Date(year, month);
+  let startDay = date.getDay() - 1;
+  let today = date.getDate();
 
   let monthLength = getTotalDays(year, month);
   let beforeMonthLength = getTotalDays(year, month - 1);
@@ -27,7 +27,7 @@ function createCalendar(year, month) {
   }
 
   for (let i = 1; i <= monthLength; i++) {
-    if (today === i && currentDate.day && currentDate.month === month, currentDate.year === year) {
+    if (today === i && date.day && date.month === month, date.year === year) {
       calendar.push({ day: i, today: true });
     } else {
       calendar.push({ day: i, today: false });
@@ -55,14 +55,8 @@ const emit = defineEmits(['updateCalendar']);
 let calendar;
 
 if (params.globalDisplay) {
-  calendar = computed(() => createCalendar(store.state.currentDate.year, store.state.currentDate.month));
-  watch(() => {
-    return store.state.currentDate.month;
-  }, () => {
-    createCalendar(store.state.currentDate.year, store.state.currentDate.month);
-  })
+
 } else {
-  calendar = computed(() => createCalendar(store.state.currentDate.year, params.month));
 }
 
 </script>

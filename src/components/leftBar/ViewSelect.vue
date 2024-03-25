@@ -7,7 +7,7 @@ const viewMode = ref('Week')
 watch(()=>{
   return viewMode.value;
 }, ()=>{
-  store.commit("updateViewmode", viewMode)
+  store.commit("updateViewMode", viewMode)
 })
 
 </script>
