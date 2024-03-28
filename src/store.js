@@ -9,8 +9,9 @@ const store = createStore({
         viewMode: "Week",
         miniCalendarView: acctualDate.getMonth(),
         calendarView: acctualDate.getMonth(),
+        display: new Array(),
 
-        _day: acctualDate.getDate(),
+        _day: acctualDate.getDate() - acctualDate.getDay() + 1, // Check if subtracting, so the start day is monday is 100% correct in every month
         _year: acctualDate.getFullYear(),
         _month: acctualDate.getMonth() + 1,
       }
@@ -18,6 +19,9 @@ const store = createStore({
   },
   mutations: {
     changeMonth(state, num) {
+      const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
       state.date._month += num;
 
       if (state.date._month < 1) {
@@ -27,6 +31,7 @@ const store = createStore({
         state.date_month = 1;
         state.date._year++;
       }
+      console.log("Now its " + monthNames[state.date._month - 1] + " , Which has length of :" + new Date(state.date._year, state.date._month, 0).getDate());
     },
     updateViewMode(state, newMode) {
       state.date.viewMode = newMode;
@@ -42,13 +47,22 @@ const store = createStore({
         let negative = state.date._day;
         state.date._day = (new Date(state.date._year, state.date._month, 0).getDate()) + negative;
       } else if (state.date._day > new Date(state.date._year, state.date._month, 0).getDate()) {
-        commit("changeMonth", 1);
         let excess = state.date._day - new Date(state.date._year, state.date._month, 0).getDate();
-        console.log(`excess equals ${state.date._day} - ${new Date(state.date._year, state.date._month, 0).getDate()}`);
-        console.log(`length of ${state.date._month} is :`, new Date(state.date._year, state.date._month, 0).getDate());
+        commit("changeMonth", 1);
         state.date._day = excess;
-        console.log(state.date._day);
       }
+      console.log(state.date._day);
+      state.date.display = [];
+
+      let displayDays = state.date._day;
+      for (let i = 0; i < 7; i++, displayDays++) {
+        if (displayDays > new Date(state.date._year, state.date._month, 0).getDate()) {
+          displayDays = 1;
+        }
+        state.date.display.push(displayDays);
+      }
+      
+      console.log(state.date.display)
     }
   },
 });

@@ -4,10 +4,10 @@ import HoursColumn from './HoursDisplay.vue';
 import store from '../../store';
 import { computed, toRaw, isProxy } from 'vue';
 
-store.dispatch("incrementWeek")
+store.dispatch("changeDay", 0)
 
 let weekDaysN = computed(()=> {
-  let rawData = store.state.currentDate.weekDisplay;
+  let rawData = store.state.date.display;
   rawData = toRaw(rawData)
   let res = []
   for(let i = 0; i < 7; i++){

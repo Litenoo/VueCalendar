@@ -6,7 +6,7 @@ import { computed } from 'vue';
 
 
 const days = [
-{ monthDay: computed(()=> store.state.currentDate.day), weekDay: 'Friday' }, 
+{ monthDay: computed(()=> store.state.date.display[0]), weekDay: 'Friday' }, 
 ]
 </script>
 
