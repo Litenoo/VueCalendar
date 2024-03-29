@@ -1,7 +1,7 @@
 <script setup>
 
 import Brand from './Brand.vue';
-import Navigation from './Nav.vue';
+import Nav from './Nav.vue';
 
 function handleUpdateCalendar(value){
   console.log('updateCalendar executed in leftoptions ! With value : ', value);
@@ -12,7 +12,7 @@ function handleUpdateCalendar(value){
   <div class="container">
     <Brand />
     <div class="container">
-      <Navigation :navClass="'topBtn'" @updateCalendarState="handleUpdateCalendar"/>
+      <Nav :navClass="'topBtn'" @updateCalendarState="handleUpdateCalendar" v-bind:global="true"/>
     </div>
   </div>
 </template>

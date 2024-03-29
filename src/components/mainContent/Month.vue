@@ -3,7 +3,8 @@
 import { computed, watch } from 'vue';
 import store from '../../store';
 
-function createCalendar(year, month) { //When go to 2023 (october for example its not displayed correct.)
+function createCalendar(year, month) {
+  console.log("CREATING CALENDAR with date year: " + year + "and month : " + month);
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -17,10 +18,6 @@ function createCalendar(year, month) { //When go to 2023 (october for example it
 
   let monthLength = getTotalDays(year, month);
   let beforeMonthLength = getTotalDays(year, month - 1);
-
-  if(startDay === 1){ //check if there is better way to occure that case
-    startDay = 6;
-  }
 
   for (let i = 0; i < startDay - 1; startDay--, beforeMonthLength--) {
     calendar.unshift({ day: beforeMonthLength, today: false });
@@ -42,25 +39,23 @@ function createCalendar(year, month) { //When go to 2023 (october for example it
   return calendar;
 }
 
+
+
 function updateWeekday(weekDay) {
-  store.commit("setDate", weekDay, null)
+  store.commit("setDate", weekDay, null);
 }
 
 const emit = defineEmits(['updateCalendar']);
 
-let calendar = computed(() => createCalendar(store.state.currentDate.year, store.state.currentDate.viewMonth));
+let calendar = computed(() => createCalendar(store.state.date._year, store.state.date._month -1));
 
-watch(() => {
-  return store.state.currentDate.viewMonth;
-}, () => {
-  createCalendar(store.state.currentDate.year, store.state.currentDate.viewMonth);
-})
 
 </script>
 
 <template>
   <div id="monthDays">
-    <div v-for="day in calendar" @click="updateWeekday(day.day)" class="miniDay">
+    <div v-for="day in calendar" @click="updateWeekday(day.day)" class="miniDay"> 
+      <!-- Make view to selected day after click on it -->
       <span class="mini-calendar__day">{{ day.day }}</span>
     </div>
   </div>
@@ -71,20 +66,20 @@ watch(() => {
   display: flex;
   justify-items: center;
   align-items: center;
+  flex-wrap: nowrap;
   flex-wrap: wrap;
   height: 77.4vh;
-  /* change something with width */
   width: 100%;
 }
 
 .miniDay {
   cursor: pointer;
+  overflow: hidden;
   border-right: 1px solid #c4c4c4;
   border-bottom: 1px solid #c4c4c4;
-  min-width: 14.2%;
   min-height: 20%;
   transition: 0.2s;
-  flex: 1;
+  flex: 0 0 14%;
 }
 
 .miniDay:hover {

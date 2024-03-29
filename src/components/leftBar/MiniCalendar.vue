@@ -4,6 +4,7 @@ import { computed, watch } from 'vue';
 import store from '../../store';
 
 function createCalendar(year, month) {
+  console.log("CREATING CALENDAR with date year: " + year + "and month : " + month);
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -11,23 +12,19 @@ function createCalendar(year, month) {
 
   const calendar = [];
 
-  const date = new Date(year, month);
-  let startDay = date.getDay() - 1;
-  let today = date.getDate();
+  const currentDate = new Date(year, month);
+  let startDay = currentDate.getDay();
+  let today = currentDate.getDate();
 
   let monthLength = getTotalDays(year, month);
   let beforeMonthLength = getTotalDays(year, month - 1);
 
-  if(startDay === -1){ //check if there is better way to occure that case
-    startDay = 6;
-  }
-
-  for (let i = 0; i < startDay; startDay--, beforeMonthLength--) {
+  for (let i = 0; i < startDay - 1; startDay--, beforeMonthLength--) {
     calendar.unshift({ day: beforeMonthLength, today: false });
   }
 
   for (let i = 1; i <= monthLength; i++) {
-    if (today === i && date.day && date.month === month, date.year === year) {
+    if (today === i && currentDate.day && currentDate.month === month, currentDate.year === year) {
       calendar.push({ day: i, today: true });
     } else {
       calendar.push({ day: i, today: false });
@@ -52,12 +49,7 @@ const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
 const emit = defineEmits(['updateCalendar']);
 
-let calendar;
-
-if (params.globalDisplay) {
-
-} else {
-}
+let calendar = computed(() => createCalendar(store.state.date._miniYear, store.state.date._miniMonth -1));
 
 </script>
 

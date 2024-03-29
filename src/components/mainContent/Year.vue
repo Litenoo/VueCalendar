@@ -51,6 +51,7 @@ import MiniCalendar from '../leftBar/MiniCalendar.vue';
   justify-content: center;
   flex-wrap: wrap;
   padding: 14px;
+  overflow-y: scroll;
 }
 
 #calendarContainer>div {
@@ -58,9 +59,11 @@ import MiniCalendar from '../leftBar/MiniCalendar.vue';
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 25%;
+  flex: 1 0 21%;
   min-width: 240px;
   font-size: 15px;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 #calendarContainer>div>div {

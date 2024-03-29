@@ -20,7 +20,7 @@ const onceDate = new Date();
 
 <template>
   <div id="leftBar">
-    <Nav global />
+    <Nav global:false />
     <MiniCalendar globalDisplay />
     <ViewSelect />
   </div>
