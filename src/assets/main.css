@@ -66,3 +66,56 @@ button{
   margin: 0px 10px;
   width: 70%;
 }
+#formContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#userFormContainer{
+  backdrop-filter: blur(5px);
+  border: 1px solid #505050;
+  display: flex;
+  border-radius: 11px;
+  min-width: 48%;
+  min-height: 42%;
+  margin-bottom: 6%;
+  flex-direction: row;
+  overflow: hidden;
+}
+#userForm{
+  flex:1;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#projectPresentation{
+  padding: 22px;
+  background-color: rgba(200, 200, 200, 0.55);
+  border-left: 1px solid #505050;
+  flex:1;
+  max-width: 420px;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  min-height: 300px;
+}
+#loginOptions {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+#loginOptions input{
+  flex: 1;
+  background-color: #06a536;
+  border: none;
+  border-radius: 8px;
+}
+#loginOptions button{
+  flex: 1;
+  background-color: #0b6ac4;
+}

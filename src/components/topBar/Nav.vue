@@ -4,7 +4,7 @@ import RightArr from '../icons/RightArrow.vue';
 import store from '../../store';
 import { computed } from 'vue';
 
-function updateDate(num) {
+async function updateDate(num) {
   if (props.global === true) {
     switch (store.state.date.viewMode) {
       case "One-day":

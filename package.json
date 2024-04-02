@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vue/server-renderer": "^3.4.21",
     "vue": "^3.4.15",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/types": "^7.24.0",
+    "@types/node": "^20.11.30",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vue/runtime-dom": "latest",
     "autoprefixer": "^10.4.17",
