@@ -3,7 +3,7 @@ import {ref} from "vue";
 import Task from './Task.vue'
 
 const taskList = ref([{
-  duration: {start: '10px', end: '18px'},
+  duration: {start: '0px', end: '18px'},
   title: 'Clean car',
   color: '#0088BB',
 }, {
@@ -17,20 +17,20 @@ let end;
 
 async function down(event) {
   const rect = event.target.getBoundingClientRect();
-  console.log('down Y : ', Math.ceil(((event.clientY - rect.top) * 100 / rect.height) *  1.04166666)); //change that value to dividing
-  start = Math.ceil(((event.clientY - rect.top) * 100 / rect.height) * 1.04166666);
+  console.log('down Y : ', Math.floor((event.clientY - rect.top)/48*4));
+  start = Math.floor((event.clientY - rect.top)/48*4);
 }
 
 async function up(event) {
   const rect = event.target.getBoundingClientRect();
-  console.log('up Y : ', Math.ceil(((event.clientY - rect.top) * 100 / rect.height) * 1.04166666));
-  end = Math.ceil(((event.clientY - rect.top) * 100 / rect.height) / 1.04166666);
+  console.log('up Y : ', Math.floor((event.clientY - rect.top)/48*4));
+  end = Math.floor((event.clientY - rect.top)/48*4);
   createTask();
 }
 
 function createTask(){
   taskList.value.push({
-    duration: {start: start * 8 + 'px', end: (end + 1 - start) * 8 + 'px'},
+    duration: {start: start * 12 + 'px', end: (end - start) * 12 + 'px'},
     title: 'clean up room',
     color: '#2233FF',
   });
@@ -52,16 +52,13 @@ function createTask(){
   background: grey;
   height: 800px;
   width: 100%;
+  background-image: linear-gradient(to bottom, black 1px, transparent 1px);
+  background-size: 100% 48px;
+  position: relative;
 }
-
 #taskGrid {
   margin: 0;
   padding: 0;
-}
-
-.column{
-  display: flex;
-  flex-direction: column;
 }
 .column div{
   height: 1104px;

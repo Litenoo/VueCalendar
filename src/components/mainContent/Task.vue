@@ -15,11 +15,12 @@ const end = props.task.duration.end;
 
 <style scoped>
 .task{
-  background-color : v-bind(color);
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid black;
   position: absolute;
+  background-color : v-bind(color);
   margin-top: v-bind(start);
-  width: 75%;
   height: v-bind(end);
-  border-radius: 12px;
 }
 </style>
