@@ -2,10 +2,6 @@
 import Plus from '../icons/Plus.vue';
 import Minus from '../icons/Minus.vue';
 import TaskView from './TaskView.vue';
-
-// function updateCalendar(){
-
-// }
 </script>
 
 <template>

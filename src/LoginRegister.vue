@@ -1,17 +1,10 @@
 <script setup>
-import Login from './components/accForm/Login.vue';
-import Register from './components/accForm/Register.vue';
+import Login from './Login.vue';
+import Register from './Register.vue';
+import store from './store.js';
 </script>
 
 <template>
-  <Login />
+  <Login v-if="store.state.display.displayLogin"/>
+  <Register v-else/>
 </template>
-
-
-<style>
-body{
-  background-image: url('../public/BackgroundLogin.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-</style>

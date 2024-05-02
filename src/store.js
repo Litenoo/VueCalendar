@@ -1,6 +1,6 @@
-import { createStore } from 'vuex';
+import {createStore} from 'vuex';
 
-const acctualDate = new Date()
+const acctualDate = new Date();
 
 const store = createStore({
   state() {
@@ -16,7 +16,13 @@ const store = createStore({
         _year: acctualDate.getFullYear(),
         _miniMonth: acctualDate.getMonth() + 1,
         _miniYear: acctualDate.getFullYear(),
-      }
+      },
+      auth: {
+        username: null,
+        email: null,
+        errorMessage: null,
+      },
+      tasks: {}
     }
   },
   mutations: {
@@ -55,11 +61,38 @@ const store = createStore({
     getTotalDays(yr, mnt) { // consider using it in actions instead of repeating one line of code moultiple times
       const lastDay = new Date(yr, mnt + 1, 0).getDate();
       return lastDay;
+    },
+    setUserData(state, username, email){
+        state.auth.username = username;
+        state.auth.email = email;
     }
   },
 
   actions: {
-    changeDay({ state, commit }, num) {
+    async loginUser({state, commit}, userData) {
+      try {
+        console.log('loginUser : ', userData.password, userData.email);
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          credentials: 'include',
+          sameSite: 'strict',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:5173',
+          },
+          body: JSON.stringify({ email: userData.email, password: userData.password }),
+        });
+        const data = await response.json();
+        console.log('recived data: ', data);
+        if (!response.ok) {
+          state.auth.errorMessage = data.error;
+        }
+        commit("setUserData", response.body.username, response.body.email);
+      } catch (err) {
+        console.log(err); //dev
+      }
+    },
+    changeDay({state, commit}, num) {
       state.date._day += num;
 
       if (state.date._day < 1) {
@@ -81,8 +114,6 @@ const store = createStore({
         }
         state.date.display.push(displayDays);
       }
-
-      // console.log(state.date.display)
     }
   },
 });

@@ -2,12 +2,12 @@
 import GridColumn from './GridColumn.vue';
 import HoursColumn from './HoursDisplay.vue';
 import store from '../../store';
-import { computed } from 'vue';
-
+import { computed, ref } from 'vue';
 
 const days = [
 { monthDay: computed(()=> store.state.date.display[0]), weekDay: 'Friday' }, 
 ]
+
 </script>
 
 

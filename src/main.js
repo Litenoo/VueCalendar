@@ -3,6 +3,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import { createStore } from 'vuex'
+import router from './router.js';
 
 const store = createStore({
   state() {
@@ -15,4 +16,4 @@ const store = createStore({
   }
 })
 
-createApp(App).mount('#app');
+createApp(App).use(router).mount('#app');

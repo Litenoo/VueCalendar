@@ -12,9 +12,7 @@ function updateCalendarState(year, month) {
   currentDate.value = getDate(year, month);
 }
 
-
 const onceDate = new Date();
-
 
 </script>
 

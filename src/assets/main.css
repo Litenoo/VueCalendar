@@ -1,121 +1,159 @@
 body {
-  padding: 0;
-  margin: 0;
-  font-family: "Roboto", Verdana, Geneva, Tahoma, sans-serif;
-  font-size: large;
-  color: #505050;
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    color: #505050;
 }
 
 #app {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
 }
 
 .topOption {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  background-color: transparent;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
 }
 
 .topBtn svg {
-  transition: 0.1s;
-  margin-top: 4px;
-  padding: 6px;
+    transition: 0.1s;
+    margin-top: 4px;
+    padding: 6px;
 }
-button{
-  border: none;
-  border-radius: 8px;
-  padding: 6px;
-  color: white;
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 6px;
+    color: white;
 }
 
 #nawArrows {
-  display: flex;
-  padding-top: 2px;
+    display: flex;
+    padding-top: 2px;
 }
-.topBtn{
-  transition: 0.1s;
+
+.topBtn {
+    transition: 0.1s;
 }
+
 .topBtn:hover {
-  transition: 0.1s;
-  background-color: #f1f1f1;
-  cursor: pointer;
-  border-radius: 12px;
+    transition: 0.1s;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    border-radius: 12px;
 }
+
 .topBtn:active {
-  transition: 0.1s;
-  background-color: #e6e6e6;
-  cursor: pointer;
-  border-radius: 14px;
+    transition: 0.1s;
+    background-color: #e6e6e6;
+    cursor: pointer;
+    border-radius: 14px;
 }
-#selectedDate{
-  color: #505050;
-  font-weight: 400;
-  text-align: center;
-  overflow: visible;
-  min-width: 180px;
+
+#selectedDate {
+    color: #505050;
+    font-weight: 400;
+    text-align: center;
+    overflow: visible;
+    min-width: 180px;
 }
-.navContent{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0px 10px;
-  width: 70%;
+
+.navContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 10px;
+    width: 70%;
 }
-#formContainer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+
+#formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
-#userFormContainer{
-  backdrop-filter: blur(5px);
-  border: 1px solid #505050;
-  display: flex;
-  border-radius: 11px;
-  min-width: 48%;
-  min-height: 42%;
-  margin-bottom: 6%;
-  flex-direction: row;
-  overflow: hidden;
+
+#userFormContainer {
+    backdrop-filter: blur(5px);
+    border: 1px solid #505050;
+    display: flex;
+    border-radius: 11px;
+    min-width: 62%;
+    min-height: 52%;
+    margin-bottom: 6%;
+    flex-direction: row;
+    overflow: hidden;
 }
-#userForm{
-  flex:1;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+#userForm {
+    flex: 2;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: white;
 }
-#projectPresentation{
-  padding: 22px;
-  background-color: rgba(200, 200, 200, 0.55);
-  border-left: 1px solid #505050;
-  flex:1;
-  max-width: 420px;
+
+#projectPresentation {
+    flex: 3;
+    padding: 22px;
+    background-color: rgba(186, 186, 186, 0.55);
+    border-left: 1px solid #505050;
 }
-form{
-  display: flex;
-  flex-direction: column;
-  max-width: 420px;
-  min-height: 300px;
+
+form {
+    display: flex;
+    flex-direction: column;
 }
-#loginOptions {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+
+form input[type = email], form input[type = password], form input[type = text] {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #a1a1a1;
+    min-width: 300px;
+    padding: 8px;
+    margin: 6px 0;
+    transition: 1s;
 }
-#loginOptions input{
-  flex: 1;
-  background-color: #06a536;
-  border: none;
-  border-radius: 8px;
+
+h6 {
+    font-weight: 100;
+    margin: 0;
+    text-align: center;
+    max-width: 300px;
 }
-#loginOptions button{
-  flex: 1;
-  background-color: #0b6ac4;
+
+form input[type = submit] {
+    outline: none;
+    border: none;
+    color: white;
+    height: 32px;
+    padding: 6px;
+    margin: 12px 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 1px 4px black;
+    background: #44c677;
+}
+
+.actionBtn {
+    color: #5e0bec;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#formContainer {
+    background: url('../public/background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
