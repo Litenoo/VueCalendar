@@ -1,16 +1,11 @@
 <script setup>
-import TopBar from './components/TopBar.vue';
-import LeftBar from './components/LeftBar.vue';
-import Calendar from './components/CalendarTemplate.vue';
+import TopBar from '../components/OptionViewComponents/TopBar.vue';
+import LeftBar from '../components/LeftBar.vue';
 </script>
 
 <template>
   <div id="app">
     <TopBar />
-    <div id="mainContent">
-      <LeftBar />
-      <Calendar />
-    </div>
   </div>
 </template>
 

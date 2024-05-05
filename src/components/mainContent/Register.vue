@@ -1,5 +1,6 @@
 <script setup>
 import store from "@/store.js";
+import { RouterLink } from 'vue-router';
 
 function changeView(){
   store.state.display.displayLogin = true;
@@ -12,7 +13,7 @@ function changeView(){
       <div id="userForm">
         <h1>Register</h1>
         <h6>Please fill the form to register. Or choose one of options
-          <span class="actionBtn" @click="changeView">Already have account?</span>
+          <router-link to="/login">Already have an account ?</router-link>
         </h6>
 
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
@@ -21,7 +22,6 @@ function changeView(){
           <input type="text" name="username" id="username" placeholder="Username" required>
           <input type="password" name="password" id="password" placeholder="Password" required>
           <input type="submit" value="Register">
-          <h6><a href="">Forgot your password ?</a></h6>
         </form>
       </div>
 

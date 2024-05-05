@@ -1,6 +1,7 @@
 <script setup>
 import Gear from '../icons/Gear.vue';
 import SearchBar from './SearchBar.vue';
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import SearchBar from './SearchBar.vue';
       <SearchBar />
     </div>
     <div class="topBtn">
-      <Gear />
+      <router-link to="/options"><Gear /></router-link>
     </div>
   </div>
 </template>

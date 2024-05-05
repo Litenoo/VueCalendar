@@ -2,45 +2,36 @@
 import {ref} from "vue";
 import Task from './Task.vue'
 
-const taskList = ref([{
-  duration: {start: '0px', end: '18px'},
-  title: 'Clean car',
-  color: '#0088BB',
-}, {
-  duration: {start: '158px', end: '80px'},
-  title: 'Take dog for a walk',
-  color: '#22BB77',
-}]);
+const taskList = ref([]);
 
+let mouseDetect = ref(null);
 let start;
 let end;
+let divInt;
 
 async function down(event) {
-  const rect = event.target.getBoundingClientRect();
-  console.log('down Y : ', Math.floor((event.clientY - rect.top)/48*4));
+  const rect = mouseDetect._value.getBoundingClientRect();
   start = Math.floor((event.clientY - rect.top)/48*4);
 }
 
 async function up(event) {
-  const rect = event.target.getBoundingClientRect();
-  console.log('up Y : ', Math.floor((event.clientY - rect.top)/48*4));
+  const rect = mouseDetect._value.getBoundingClientRect();
   end = Math.floor((event.clientY - rect.top)/48*4);
-  createTask();
+  createTask(start, end);
 }
 
-function createTask(){
+function createTask(startPoint, endPoint){
   taskList.value.push({
-    duration: {start: start * 12 + 'px', end: (end - start) * 12 + 'px'},
+    duration: {start: startPoint * 12 + 'px', end: (endPoint - start) * 12 + 'px'},
     title: 'clean up room',
-    color: '#2233FF',
+    color: '#FF2249',
   });
-  console.log(taskList);
 }
 
 </script>
 <template>
   <div id="taskGrid">
-    <div ref="el" id="hoverDiv" @mousedown="down($event)" @mouseup="up($event)">
+    <div ref="mouseDetect" id="hoverDiv" @mousedown="down($event)" @mouseup="up($event)">
       <Task v-for="(task, index) in taskList" :task="taskList[index]"></Task>
     </div>
   </div>
@@ -49,10 +40,9 @@ function createTask(){
 <style scoped>
 
 #hoverDiv {
-  background: grey;
-  height: 800px;
+  height: 100%;
   width: 100%;
-  background-image: linear-gradient(to bottom, black 1px, transparent 1px);
+  background-image: linear-gradient(to bottom, #a1a1a1 1px, transparent 1px);
   background-size: 100% 48px;
   position: relative;
 }

@@ -1,5 +1,6 @@
 import {createStore} from 'vuex';
 
+
 const acctualDate = new Date();
 
 const store = createStore({
@@ -70,6 +71,7 @@ const store = createStore({
 
   actions: {
     async loginUser({state, commit}, userData) {
+      console.log('login');
       try {
         console.log('loginUser : ', userData.password, userData.email);
         const response = await fetch('http://localhost:3000/login', {
@@ -92,8 +94,21 @@ const store = createStore({
         console.log(err); //dev
       }
     },
+    async recoveryPassword({state, commit}, userData){
+      fetch('http://localhost:3000/changePassword', {
+        method: 'POST',
+        credentials: 'include',
+        sameSite: 'strict',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:5173',
+        },
+        body: JSON.stringify({ email: userData.email}),
+      })
+    },
     changeDay({state, commit}, num) {
       state.date._day += num;
+
 
       if (state.date._day < 1) {
         commit("changeMonth", -1);
