@@ -103,7 +103,7 @@ const store = createStore({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:5173',
         },
-        body: JSON.stringify({ email: userData.email}),
+        body: JSON.stringify({ email: userData.email, username : ''}),
       })
     },
     changeDay({state, commit}, num) {

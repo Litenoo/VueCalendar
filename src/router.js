@@ -4,13 +4,15 @@ import Login from './components/mainContent/Login.vue';
 import Register from './components/mainContent/Register.vue';
 import Options from './mainComponents/Options.vue';
 import PasswordRecovery from './mainComponents/PasswordRecovery.vue'
+import ChangePassword from "./mainComponents/ChangePassword.vue";
 
 const routes = [
   {path: '/', component: Calendar},
   {path: '/login', component: Login},
   {path: '/register', component: Register},
   {path : '/options', component : Options},
-  {path : '/passwordRecovery', component : PasswordRecovery}
+  {path : '/passwordRecovery', component : PasswordRecovery},
+  {path : '/changePassword', component:ChangePassword}
 ];
 
 const router = createRouter({
@@ -20,7 +22,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   try {
-    if (to.path !== '/login' && to.path !== '/register' && to.path !== '/passwordRecovery') {
+    if (to.path !== '/login' && to.path !== '/register' && to.path !== '/passwordRecovery' && to.path !== '/changePassword') {
       const response = await fetch('http://localhost:3000/userData', {
         method: 'POST',
         credentials: 'include',
