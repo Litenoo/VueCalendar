@@ -1,6 +1,5 @@
 import {createStore} from 'vuex';
 
-
 const acctualDate = new Date();
 
 const store = createStore({
@@ -41,9 +40,6 @@ const store = createStore({
     },
     changeMonth(state, num) {
 
-      // const monthNames = ["January", "February", "March", "April", "May", "June", //dev
-      //   "July", "August", "September", "October", "November", "December" //dev
-      // ]; //dev
       state.date._month += num;
 
       if (state.date._month < 1) {
@@ -54,7 +50,6 @@ const store = createStore({
         state.date._month = 1;
         state.date._year++;
       }
-      // console.log("Now its " + monthNames[state.date._month - 1] + " , Which has length of :" + new Date(state.date._year, state.date._month, 0).getDate()); //dev
     },
     updateViewMode(state, newMode) {
       state.date.viewMode = newMode;
@@ -63,17 +58,27 @@ const store = createStore({
       const lastDay = new Date(yr, mnt + 1, 0).getDate();
       return lastDay;
     },
-    setUserData(state, username, email){
-        state.auth.username = username;
-        state.auth.email = email;
+    setUserData(state, username, email) {
+      state.auth.username = username;
+      state.auth.email = email;
     }
   },
 
   actions: {
+    async registerUser({state}, userData) {
+      await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        credentials: 'include',
+        sameSite: 'strict',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:5173',
+        },
+        body: JSON.stringify({email: userData.email, password: userData.password, username: userData.username}),
+      });
+    },
     async loginUser({state, commit}, userData) {
-      console.log('login');
       try {
-        console.log('loginUser : ', userData.password, userData.email);
         const response = await fetch('http://localhost:3000/login', {
           method: 'POST',
           credentials: 'include',
@@ -82,7 +87,7 @@ const store = createStore({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:5173',
           },
-          body: JSON.stringify({ email: userData.email, password: userData.password }),
+          body: JSON.stringify({email: userData.email, password: userData.password}),
         });
         const data = await response.json();
         console.log('recived data: ', data);
@@ -94,8 +99,9 @@ const store = createStore({
         console.log(err); //dev
       }
     },
-    async recoveryPassword({state, commit}, userData){
-      fetch('http://localhost:3000/changePassword', {
+    async changePassword({state}, userData){ //add token here to authorize user !!! IMPROTANT ASF
+      console.log('sending request to change password with data : password:', userData.password,'  token : ', userData.token);
+      await fetch('http://localhost:3000/changePassword', {
         method: 'POST',
         credentials: 'include',
         sameSite: 'strict',
@@ -103,8 +109,23 @@ const store = createStore({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:5173',
         },
-        body: JSON.stringify({ email: userData.email, username : ''}),
+        body: JSON.stringify({password: userData.password, token : userData.token}),
       })
+    },
+    async recoveryPassword({state, commit}, userData) {
+      await fetch('http://localhost:3000/passwordRecoveryToken', {
+        method: 'POST',
+        credentials: 'include',
+        sameSite: 'strict',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:5173',
+        },
+        body: JSON.stringify({email: userData.email, username: ''}),
+      })
+    },
+    async validRecoveryToken(URLtoken) {
+
     },
     changeDay({state, commit}, num) {
       state.date._day += num;
@@ -119,7 +140,6 @@ const store = createStore({
         commit("changeMonth", 1);
         state.date._day = excess;
       }
-      // console.log(state.date._day);
       state.date.display = [];
 
       let displayDays = state.date._day;

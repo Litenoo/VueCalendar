@@ -85,8 +85,9 @@ button {
     border: 1px solid #505050;
     display: flex;
     border-radius: 11px;
-    min-width: 62%;
-    min-height: 52%;
+    width: 62%;
+    min-width: 300px;
+    min-height: 60%;
     margin-bottom: 6%;
     flex-direction: row;
     overflow: hidden;
@@ -100,6 +101,7 @@ button {
     justify-content: flex-start;
     align-items: center;
     background: white;
+    min-width: 360px;
 }
 
 #projectPresentation {
@@ -119,8 +121,8 @@ form input[type = email], form input[type = password], form input[type = text] {
     border: none;
     border-bottom: 1px solid #a1a1a1;
     min-width: 300px;
-    padding: 8px;
-    margin: 6px 0;
+    padding: 8px 8px 14px 8px;
+    margin: 10px 0;
     transition: 1s;
 }
 
@@ -144,6 +146,12 @@ form input[type = submit] {
     cursor: pointer;
     box-shadow: 0 1px 4px black;
     background: #44c677;
+    transition: 0.5s;
+}
+form input[type = submit]:hover {
+    box-shadow: 0 1px 7px black;
+    background: #2bbf65;
+    transition: 0.5s;
 }
 
 .actionBtn {
@@ -156,4 +164,22 @@ form input[type = submit] {
     background: url('../public/background.svg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+.errorMessage{
+    color: #800000;
+    font-weight: bold;
+    font-size: 14px;
+}
+.termsOfUse{
+    display: flex;
+    padding: 6px;
+    font-size: 12px;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox{
+    width: 14px;
+}
+label{
+    font-size: 12px;
 }
