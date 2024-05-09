@@ -8,10 +8,12 @@ const router = useRouter();
 const email = defineModel('email');
 const password = defineModel('password');
 
-let errorMessage = ref('');
+let errorMessage = ref(store.state.auth.errorMessage);
 
 async function submitForm(){
     await store.dispatch("loginUser", {email : email.value, password: password.value});
+    errorMessage.value = store.state.auth.errorMessage;
+    store.commit("clearErrorMsg");
     await router.push('/');
 }
 </script>

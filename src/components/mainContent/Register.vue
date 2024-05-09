@@ -16,9 +16,10 @@ let errorMessage = ref('');
 async function submitForm() {
   if (password.value === passwordRepeat.value) {
     await store.dispatch("registerUser", {email: email.value, password: password.value, username: username.value});
-    await router.push('/login');
-  } else {
-    errorMessage.value = 'Please check if you entered same password twice.';
+    errorMessage.value = store.state.auth.errorMessage;
+    store.commit("clearErrorMsg");
+  }else{
+  errorMessage.value = 'Please check if you entered same password twice.';
   }
 }
 </script>
@@ -39,6 +40,7 @@ async function submitForm() {
           <input type="password" name="passwordRepeat" id="passwordRepeat" placeholder="Repeat Password"
                  v-model="passwordRepeat" required>
           <input type="submit" value="Register">
+          <span class="errorMessage">{{errorMessage}}</span>
           <div class="termsOfUse"><input class="checkbox" type="checkbox" required> I accept the terms of use</div>
         </form>
       </div>

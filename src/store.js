@@ -1,4 +1,5 @@
 import {createStore} from 'vuex';
+import router from './router.js';
 
 const acctualDate = new Date();
 
@@ -61,21 +62,36 @@ const store = createStore({
     setUserData(state, username, email) {
       state.auth.username = username;
       state.auth.email = email;
+    },
+    setErrorMsg(state, msg){
+      console.log('seterrorMSG data : ', msg);
+      state.auth.errorMessage = msg;
+    },
+    clearErrorMsg(state){
+      state.auth.errorMessage = null;
     }
   },
 
   actions: {
-    async registerUser({state}, userData) {
-      await fetch('http://localhost:3000/register', {
+    async registerUser({state, commit}, userData) {
+      const response = await fetch('http://localhost:3000/register', {
         method: 'POST',
         credentials: 'include',
         sameSite: 'strict',
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:5173',
+          'Cookie': 'sameSite=strict',
         },
         body: JSON.stringify({email: userData.email, password: userData.password, username: userData.username}),
       });
+      const data = await response.json();
+      if(data.errorMessage){
+        console.log('login error : ', data.errorMessage);
+        commit("setErrorMsg", data.errorMessage);
+      }else{
+        await router.push('/');
+      }
     },
     async loginUser({state, commit}, userData) {
       try {
@@ -90,17 +106,16 @@ const store = createStore({
           body: JSON.stringify({email: userData.email, password: userData.password}),
         });
         const data = await response.json();
-        console.log('recived data: ', data);
         if (!response.ok) {
-          state.auth.errorMessage = data.error;
-        }
+          commit("setErrorMsg", data.errorMessage);
+        }else{
         commit("setUserData", response.body.username, response.body.email);
+        }
       } catch (err) {
         console.log(err); //dev
       }
     },
     async changePassword({state}, userData){ //add token here to authorize user !!! IMPROTANT ASF
-      console.log('sending request to change password with data : password:', userData.password,'  token : ', userData.token);
       await fetch('http://localhost:3000/changePassword', {
         method: 'POST',
         credentials: 'include',
@@ -108,23 +123,29 @@ const store = createStore({
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:5173',
+          'Cookie': 'sameSite=strict',
         },
         body: JSON.stringify({password: userData.password, token : userData.token}),
       })
     },
     async recoveryPassword({state, commit}, userData) {
-      await fetch('http://localhost:3000/passwordRecoveryToken', {
-        method: 'POST',
-        credentials: 'include',
-        sameSite: 'strict',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:5173',
-        },
-        body: JSON.stringify({email: userData.email, username: ''}),
-      })
+      try{
+        await fetch('http://localhost:3000/passwordRecoveryToken', {
+          method: 'POST',
+          credentials: 'include',
+          sameSite: 'strict',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:5173',
+            'Cookie': 'sameSite=strict',
+          },
+          body: JSON.stringify({email: userData.email, username: ''}),
+        });
+      }catch(err){
+        console.log(err);
+      }
     },
-    async validRecoveryToken(URLtoken) {
+    async validRecoveryToken(URLtoken) { //dev check if its needed/used
 
     },
     changeDay({state, commit}, num) {

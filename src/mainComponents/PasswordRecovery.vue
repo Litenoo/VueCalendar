@@ -8,8 +8,8 @@ const email = defineModel('email');
 
 
 async function submitForm() {
-  await store.dispatch("recoveryPassword", {email: email.value});
-  await router.push("/login");
+  store.dispatch("recoveryPassword", {email: email.value});
+  await router.push('/login');
 }
 </script>
 
