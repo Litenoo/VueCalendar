@@ -4,8 +4,6 @@ import {RouterLink} from 'vue-router';
 import {useRouter} from 'vue-router';
 import {ref} from 'vue';
 
-const router = useRouter();
-
 const email = defineModel('email');
 const username = defineModel('username');
 const password = defineModel('password');
@@ -35,11 +33,17 @@ async function submitForm() {
 
         <form @submit.prevent="submitForm">
           <input type="email" name="email" id="email" placeholder="Email" required v-model="email">
+
           <input type="text" name="username" id="username" placeholder="Username" required v-model="username">
+
           <input type="password" name="password" id="password" placeholder="Password" required v-model="password">
+
           <input type="password" name="passwordRepeat" id="passwordRepeat" placeholder="Repeat Password"
                  v-model="passwordRepeat" required>
+
+
           <input type="submit" value="Register">
+
           <span class="errorMessage">{{errorMessage}}</span>
           <div class="termsOfUse"><input class="checkbox" type="checkbox" required> I accept the terms of use</div>
         </form>
@@ -48,7 +52,7 @@ async function submitForm() {
       <div id="projectPresentation">
         CalendarApp - The most efficient way to organise your day, week, life.
 
-        *Screenshots from project*
+        *Screenshots from the project*
       </div>
 
     </div>

@@ -167,7 +167,6 @@ form input[type = submit]:hover {
 }
 .errorMessage{
     color: #800000;
-    font-weight: bold;
     font-size: 14px;
 }
 .termsOfUse{

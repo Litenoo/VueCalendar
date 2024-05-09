@@ -14,6 +14,9 @@ function createCalendar(year, month) {
 
   const currentDate = new Date(year, month);
   let startDay = currentDate.getDay();
+  if(startDay === 0){
+    startDay = 7;
+  }
   let today = currentDate.getDate();
 
   let monthLength = getTotalDays(year, month);

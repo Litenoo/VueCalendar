@@ -35,10 +35,10 @@ let dateToDisplay;
 let yearToDisplay;
 
 if (props.global === true) {
-  dateToDisplay = computed(() => monthNames[store.state.date._month]);
+  dateToDisplay = computed(() => monthNames[store.state.date._month - 1]);
   yearToDisplay = computed(() => store.state.date._year);
 } else {
-  dateToDisplay = computed(() => monthNames[store.state.date._miniMonth]);
+  dateToDisplay = computed(() => monthNames[store.state.date._miniMonth - 1]);
   yearToDisplay = computed(() => store.state.date._miniYear);
 }
 
