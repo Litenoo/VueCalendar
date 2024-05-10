@@ -1,15 +1,13 @@
 <script setup>
+import { ref } from 'vue';
 const props = defineProps({
   task : Object,
 });
-const color = props.task.color;
-const start = props.task.duration.start;
-const end = props.task.duration.end;
 </script>
 
 <template>
-  <div class="task">
-    task : {{task.title}}
+  <div class="task" :style="{ backgroundColor: task.color, marginTop: task.size.start, height: task.size.end }">
+    task : {{task.size.end}}
   </div>
 </template>
 
@@ -19,8 +17,7 @@ const end = props.task.duration.end;
   border-radius: 4px;
   border: 1px solid black;
   position: absolute;
-  background-color : v-bind(color);
-  margin-top: v-bind(start);
-  height: v-bind(end);
+  transition: 0.1s;
+  user-select: none;
 }
 </style>
