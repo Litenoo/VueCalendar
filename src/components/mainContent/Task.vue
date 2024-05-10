@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 const props = defineProps({
   task : Object,
 });
@@ -7,7 +6,8 @@ const props = defineProps({
 
 <template>
   <div class="task" :style="{ backgroundColor: task.color, marginTop: task.size.start, height: task.size.end }">
-    task : {{task.size.end}}
+    {{task.title}}
+    {{`${task.duration.startTime} - ${task.duration.endTime}`}}
   </div>
 </template>
 
@@ -19,5 +19,6 @@ const props = defineProps({
   position: absolute;
   transition: 0.1s;
   user-select: none;
+  box-sizing: border-box;
 }
 </style>

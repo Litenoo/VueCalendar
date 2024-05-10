@@ -1,10 +1,12 @@
 <script setup>
-
-import { computed } from 'vue';
-import store from '../../store';
-
+import { defineProps } from 'vue'
+import store from "../../store.js";
+const props = defineProps({
+  month: Number,
+});
+const month = props.month;
 function createCalendar(year, month) {
-  console.log("CREATING CALENDAR with date year: " + year + "and month : " + month);
+  console.log('creating minimonth with month : ', month, 'year :', year);
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -41,54 +43,18 @@ function createCalendar(year, month) {
   }
   return calendar;
 }
-
-
-
-function updateWeekday(weekDay) {
-  store.commit("setDate", weekDay, null);
-}
-
-let calendar = computed(() => createCalendar(store.state.date._year, store.state.date._month -1));
-
-
+let calendar = createCalendar(store.state.date._year, month);
 </script>
 
 <template>
-  <div id="monthDays">
-    <div v-for="day in calendar" @click="updateWeekday(day.day)" class="miniDay">
-      <span class="mini-calendar__day">{{ day.day }}</span>
+    <div id="weekDays"><span v-for="weekDay in daysNames" class="miniDay">{{ weekDay }}</span></div>
+    <div id="miniDays">
+      <div v-for="day in calendar" class="miniDay">
+        <span class="mini-calendar__day">{{ day.day }}</span>
+      </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
-#monthDays {
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  flex-wrap: wrap;
-  height: 100%;
-  width: 100%;
-  overflow: scroll;
-}
 
-.miniDay {
-  cursor: pointer;
-  overflow: hidden;
-  border-right: 1px solid #c4c4c4;
-  border-bottom: 1px solid #c4c4c4;
-  min-height: 20%;
-  transition: 0.2s;
-  flex: 0 0 14%;
-}
-
-.miniDay:hover {
-  transition: 0.35s;
-  background-color: #f1f1f1;
-}
-
-.mini-calendar__day {
-  display: block;
-  padding: 8px 0 0 12px;
-}
 </style>

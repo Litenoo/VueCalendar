@@ -2,12 +2,12 @@
 import store from '../../store';
 import { ref, watch } from 'vue';
 
-const viewMode = ref('Week')
+const viewMode = ref('Week');
 
 watch(()=>{
   return viewMode.value;
 }, ()=>{
-  store.commit("updateViewMode", viewMode)
+  store.commit("updateViewMode", viewMode);
 })
 
 </script>

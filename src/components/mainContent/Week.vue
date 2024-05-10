@@ -2,7 +2,7 @@
 import GridColumn from './GridColumn.vue';
 import HoursColumn from './HoursDisplay.vue';
 import store from '../../store';
-import { computed, toRaw, isProxy } from 'vue';
+import { computed, toRaw } from 'vue';
 
 store.dispatch("changeDay", 0)
 
@@ -28,69 +28,9 @@ let weekDaysN = computed(()=> {
     <div id="mainGrid">
       <HoursColumn />
       <!-- Instead of GridColumn moultiple times make v-for -->
-      <GridColumn />
-      <GridColumn />
-      <GridColumn />
-      <GridColumn />
-      <GridColumn />
-      <GridColumn />
-      <GridColumn />
+      <div v-for="index in 7" :key="index">
+        <GridColumn />
+      </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-/* move all CSS to global. Do the same in ./Day.vue */
-#grid {
-  display: grid;
-  grid-column: 1;
-  grid-row: 100px;
-  width: 100%;
-}
-
-#mainGrid {
-  overflow-y: scroll;
-  height: calc(100vh - 112px);
-  display: grid;
-  grid-template-columns: 20px repeat(7, 1fr);
-  border-bottom: 1px solid #d1d1d1;
-}
-
-.columnGrid {
-  display: flex;
-  grid-template-columns: repeat(7, 1fr);
-  border-bottom: 1px solid #d1d1d1;
-  padding: 5px 5px 0px 0px;
-  margin: 0px 12px 0px 20px;
-}
-
-.column {
-  height: 100%;
-}
-
-.dayName {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.monthDay {
-  font-size: 26px;
-  color: #505050;
-}
-
-.weekDay {
-  font-size: 13px;
-}
-
-#mainContentContainer {
-  display: flex;
-  width: 100%;
-}
-
-#gridContainer {
-  /* change its name */
-  width: 100%;
-}
-</style>

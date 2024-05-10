@@ -69,7 +69,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0px 10px;
+    margin: 0 10px;
     width: 70%;
 }
 
@@ -166,7 +166,7 @@ form input[type = submit]:hover {
     background-size: cover;
 }
 .errorMessage{
-    color: #800000;
+    color: #b30000;
     font-size: 14px;
 }
 .termsOfUse{
@@ -181,4 +181,37 @@ form input[type = submit]:hover {
 }
 label{
     font-size: 12px;
+}
+
+#mainGrid {
+    overflow-y: scroll;
+    height: calc(100vh - 112px);
+    display: grid;
+    grid-template-columns: 20px repeat(7, 1fr);
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.columnGrid {
+    display: flex;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 1px solid #d1d1d1;
+    padding: 5px 5px 0px 0px;
+    margin: 0px 12px 0px 20px;
+}
+
+.dayName {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.monthDay {
+    font-size: 26px;
+    color: #505050;
+}
+
+#gridContainer {
+    /* change its name */
+    width: 100%;
 }

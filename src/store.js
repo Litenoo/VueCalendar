@@ -11,7 +11,6 @@ const store = createStore({
         miniCalendarView: acctualDate.getMonth(),
         calendarView: acctualDate.getMonth(),
         display: [],
-
         _day: acctualDate.getDate() - acctualDate.getDay() + 1, // Check if subtracting, so the start day is monday is 100% correct in every month
         _month: acctualDate.getMonth() + 1,
         _year: acctualDate.getFullYear(),
@@ -27,6 +26,7 @@ const store = createStore({
     }
   },
   mutations: {
+    //Calendar system mutations
     changeMiniMonth(state, num) {
       state.date._miniMonth += num;
 
@@ -59,10 +59,12 @@ const store = createStore({
       const lastDay = new Date(yr, mnt + 1, 0).getDate();
       return lastDay;
     },
+    //Account system mutations
     setUserData(state, username, email) {
       state.auth.username = username;
       state.auth.email = email;
     },
+    //Error messages in login/register/recovery views mutations
     setErrorMsg(state, msg){
       console.log('seterrorMSG data : ', msg);
       state.auth.errorMessage = msg;
@@ -73,6 +75,7 @@ const store = createStore({
   },
 
   actions: {
+    //Account system actions
     async registerUser({state, commit}, userData) {
       const response = await fetch('http://localhost:3000/register', {
         method: 'POST',
@@ -115,6 +118,7 @@ const store = createStore({
         console.log(err); //dev
       }
     },
+    //Password recovery actions
     async changePassword({state}, userData){ //add token here to authorize user !!! IMPROTANT ASF
       await fetch('http://localhost:3000/changePassword', {
         method: 'POST',
@@ -145,12 +149,9 @@ const store = createStore({
         console.log(err);
       }
     },
-    async validRecoveryToken(URLtoken) { //dev check if its needed/used
-
-    },
+    //Calendar system actions
     changeDay({state, commit}, num) {
       state.date._day += num;
-
 
       if (state.date._day < 1) {
         commit("changeMonth", -1);

@@ -1,7 +1,6 @@
 <script setup>
 import store from "@/store.js";
 import {RouterLink} from 'vue-router';
-import {useRouter} from 'vue-router';
 import {ref} from 'vue';
 
 const email = defineModel('email');

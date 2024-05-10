@@ -1,9 +1,10 @@
 <script setup>
 
-import { computed, watch } from 'vue';
+import { computed } from 'vue';
 import store from '../../store';
 
 function createCalendar(year, month) {
+  console.log('creating minimonth with month : ', month, 'year :', year);
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;
@@ -41,15 +42,7 @@ function createCalendar(year, month) {
   return calendar;
 }
 
-const params = defineProps({
-  globalDisplay: Boolean,
-  month: Number,
-})
-
-
 const daysNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-
-const emit = defineEmits(['updateCalendar']);
 
 let calendar = computed(() => createCalendar(store.state.date._miniYear, store.state.date._miniMonth -1));
 
@@ -118,12 +111,5 @@ let calendar = computed(() => createCalendar(store.state.date._miniYear, store.s
 
 .miniDay:hover {
   cursor: pointer;
-}
-
-#calendarTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 6px 6px 0;
 }
 </style>
