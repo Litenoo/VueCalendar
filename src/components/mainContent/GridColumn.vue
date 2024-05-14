@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import TaskComp from './Task.vue';
+import store from '../../store.js';
 
 const taskList = ref([]);
 
@@ -53,17 +54,19 @@ async function updateTask(event) {
   }
 }
 
-let mouseBtnStatus = false;
+store.commit('changeMouseBtn', false);
 function mouseDown(){
-  mouseBtnStatus = true;
+  store.commit('changeMouseBtn',true);
 }
 
 function mouseUp(){
-  mouseBtnStatus = false;
+  store.commit('changeMouseBtn',false);
 }
+
 let beforeCoords = {y:0}; //x probably will be needed in future for moving by grids
+
 const mouseMove = (event) => {
-  if(mouseBtnStatus){
+  if(store.state.mouseBtnStatus){
   // const _x = event.clientX;
   const _y = event.clientY;
   if(_y -beforeCoords.y <= 15){
@@ -72,14 +75,12 @@ const mouseMove = (event) => {
   beforeCoords = { y:_y};
   }
 };
-
-
-//change mousemove to setInterval which will return mousePosition every for example 10ms;
 </script>
+
 <template>
-  <div id="taskGrid">
-    <div ref="mouseDetect" id="hoverDiv" @mouseup="mouseUp()" @mousedown="initTask($event); mouseDown()" @mousemove="mouseMove($event)">
-      <TaskComp v-for="(task, index) in taskList" :task="taskList[index]"></TaskComp>
+  <div id="taskGrid" @mouseup="mouseUp()">
+    <div ref="mouseDetect" id="hoverDiv" @mousedown="initTask($event); mouseDown()" @mouseup="mouseUp()" @mousemove="mouseMove($event)">
+      <TaskComp v-for="(task, index) in taskList" :task="taskList[index]" @mousedown.stop></TaskComp>
     </div>
   </div>
 </template>

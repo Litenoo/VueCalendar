@@ -9,7 +9,7 @@
 import { ref } from 'vue';
 
 const hours = ref([]);
-for (let i = 1; i <= 23; i++) {
+for (let i = 1; i <= 24; i++) {
   hours.value.push(`${i}`);
 }
 
@@ -21,7 +21,7 @@ for (let i = 1; i <= 23; i++) {
   width: 20px;
 }
 #HoursDisplay div{
-  height: 46px;
+  height: 48px;
   font-size: 12px;
   color: #505050;
   text-align: center;

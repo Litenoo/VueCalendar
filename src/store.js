@@ -22,7 +22,8 @@ const store = createStore({
         email: null,
         errorMessage: null,
       },
-      tasks: {}
+      tasks: {},
+      mouseBtnStatus: false,
     }
   },
   mutations: {
@@ -71,6 +72,9 @@ const store = createStore({
     },
     clearErrorMsg(state){
       state.auth.errorMessage = null;
+    },
+    changeMouseBtn(state, bool){
+      state.mouseBtnStatus = bool;
     }
   },
 
@@ -119,7 +123,7 @@ const store = createStore({
       }
     },
     //Password recovery actions
-    async changePassword({state}, userData){ //add token here to authorize user !!! IMPROTANT ASF
+    async changePassword({state}, userData){ //add token here to authorize user !!! IMPROTANT ASF -- Probably done but check later
       await fetch('http://localhost:3000/changePassword', {
         method: 'POST',
         credentials: 'include',
@@ -171,7 +175,60 @@ const store = createStore({
         }
         state.date.display.push(displayDays);
       }
+    },
+    //tasks
+    async addTask(state, task){
+      try{
+        await fetch('http://localhost:3000/addTask', {
+          method: 'POST',
+          credentials: 'include',
+          sameSite: 'strict',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:5173',
+            'Cookie': 'sameSite=strict',
+          },
+          body: JSON.stringify({task}),
+        });
+      }catch(err){
+        console.log(err);
+      }
+    },
+    async deleteTask(state, task){
+      try{
+        await fetch('http://localhost:3000/deleteTask', {
+          method: 'POST',
+          credentials: 'include',
+          sameSite: 'strict',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:5173',
+            'Cookie': 'sameSite=strict',
+          },
+          body: JSON.stringify({task}),
+        });
+      }catch(err){
+        console.log(err);
+      }
+    },
+    async updateTask(state, task){
+      try{
+        await fetch('http://localhost:3000/updateTask', {
+          method: 'POST',
+          credentials: 'include',
+          sameSite: 'strict',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:5173',
+            'Cookie': 'sameSite=strict',
+          },
+          body: JSON.stringify({task}),
+        });
+      }catch(err){
+        console.log(err);
+      }
     }
+
   },
 });
 
