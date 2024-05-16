@@ -1,18 +1,12 @@
 import {createWebHistory, createRouter} from 'vue-router';
-import Calendar from './mainComponents/Calendar.vue';
-import Login from './components/mainContent/Login.vue';
-import Register from './components/mainContent/Register.vue';
-import Options from './mainComponents/Options.vue';
-import PasswordRecovery from './mainComponents/PasswordRecovery.vue'
-import ChangePassword from "./mainComponents/ChangePassword.vue";
 
 const routes = [
-  {path: '/', component: Calendar},
-  {path: '/login', component: Login},
-  {path: '/register', component: Register},
-  {path: '/options', component: Options},
-  {path: '/passwordRecovery', component: PasswordRecovery},
-  {path: '/changePassword', component: ChangePassword}
+  {path: '/', component: ()=>import('./mainComponents/Calendar.vue')},
+  {path: '/login', component: ()=>import('./components/mainContent/Login.vue')},
+  {path: '/register', component: ()=>import('./components/mainContent/Register.vue')},
+  {path: '/options', component:  ()=>import('./mainComponents/Options.vue')},
+  {path: '/passwordRecovery', component:  ()=>import('./mainComponents/PasswordRecovery.vue')},
+  {path: '/changePassword', component: ()=>import('./mainComponents/ChangePassword.vue')},
 ];
 
 const router = createRouter({

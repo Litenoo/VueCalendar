@@ -1,4 +1,5 @@
 <script setup>
+import store from '../store.js';
 import TopBar from '../components/TopBar.vue';
 import LeftBar from '../components/LeftBar.vue';
 import Calendar from '../components/CalendarTemplate.vue';
@@ -8,7 +9,7 @@ import Calendar from '../components/CalendarTemplate.vue';
   <div id="app">
     <TopBar />
     <div id="mainContent">
-      <LeftBar />
+      <LeftBar v-if="store.state.leftBar" />
       <Calendar />
     </div>
   </div>

@@ -161,7 +161,7 @@ form input[type = submit]:hover {
 }
 
 #formContainer {
-    background: url('../public/background.svg');
+    background: url('background.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -195,8 +195,8 @@ label{
     display: flex;
     grid-template-columns: repeat(7, 1fr);
     border-bottom: 1px solid #d1d1d1;
-    padding: 5px 5px 0px 0px;
-    margin: 0px 12px 0px 20px;
+    padding: 5px 5px 0 0;
+    margin: 0 12px 0 20px;
 }
 
 .dayName {

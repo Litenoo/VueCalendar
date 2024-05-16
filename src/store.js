@@ -22,8 +22,9 @@ const store = createStore({
         email: null,
         errorMessage: null,
       },
-      tasks: {},
+      tasks: [],
       mouseBtnStatus: false,
+      leftBar: true,
     }
   },
   mutations: {
@@ -75,6 +76,9 @@ const store = createStore({
     },
     changeMouseBtn(state, bool){
       state.mouseBtnStatus = bool;
+    },
+    SwitchLBar(state){
+      state.leftBar = !state.leftBar;
     }
   },
 

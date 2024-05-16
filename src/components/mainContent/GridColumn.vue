@@ -9,22 +9,13 @@ let mouseDetect = ref(null);
 let start;
 
 class Task{
-  constructor(_startCoord, _endCoord, title){
-    this.title = title;
+  constructor(_startCoord, _endCoord){
+    this.date = {day: new Date().getDate(), month: new Date().getMonth()};
+    this.title = null;
     this.color = '#08CCAA';
-    this.duration = {startTime:'', endTime:''};
     this.size = {start:'0px', end:'0px'};
     this.startCoord = _startCoord;
     this.endCoord = _endCoord;
-    this.setSize();
-  } // dev Remove these methods and handle these values by interpreting on startCoord and endCoord. Both of these function base on them
-  setSize(){
-    this.size.start = this.startCoord * 12 + 'px';
-    this.size.end = (this.endCoord * 12) - (this.startCoord * 12) + 'px';
-  }
-  setDuration(){
-    this.duration.startTime = (Math.floor(this.startCoord /4) + ((this.startCoord /4) % 1) * 0.6).toFixed(2);
-    this.duration.endTime = (Math.floor(this.endCoord /4) + ((this.endCoord /4) % 1) * 0.6).toFixed(2);
   }
   commitData(){
 
@@ -33,7 +24,6 @@ class Task{
 
 function createTask(startPoint, endPoint){
   const task = new Task(startPoint, endPoint, 'Title', '12-14', '#1be460');
-  task.setDuration();
   taskList.value.push(task);
 }
 
@@ -49,12 +39,11 @@ async function updateTask(event) {
   if(task){
     console.log('endcoord : ', Math.floor((event.clientY - rect.top)/48*4));
     task.endCoord = Math.floor((event.clientY - rect.top)/48*4);
-    task.setDuration();
-    task.setSize();
   }
 }
 
 store.commit('changeMouseBtn', false);
+
 function mouseDown(){
   store.commit('changeMouseBtn',true);
 }

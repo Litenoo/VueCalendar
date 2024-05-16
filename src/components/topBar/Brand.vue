@@ -1,14 +1,15 @@
 <script setup>
 import Bars from '../icons/Bars.vue';
+import store from "../../store.js";
 
 function hideLeftBar() {
-  console.log('Hide left bar');
+  store.commit("SwitchLBar");
 }
 
 </script>
 
 <template>
-  <div id="conatiner">
+  <div id="container">
   <button class="topOption" @click="hideLeftBar">
     <Bars />
   </button>
@@ -17,7 +18,7 @@ function hideLeftBar() {
 </template>
 
 <style>
-#conatiner{
+#container{
   display: flex;
   justify-content: center;
   align-items: center;

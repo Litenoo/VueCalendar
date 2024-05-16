@@ -3,16 +3,6 @@ import MiniCalendar from './leftBar/MiniCalendar.vue';
 import Nav from './topBar/Nav.vue';
 import ViewSelect from './leftBar/ViewSelect.vue';
 
-function getDate(year, month) {
-  const date = new Date(year, month);
-  return { year: date.getFullYear(), month: date.getMonth(), weekDay: date.getDay(), monthDay: date.getDate() };
-}
-
-function updateCalendarState(year, month) {
-  currentDate.value = getDate(year, month);
-}
-
-const onceDate = new Date();
 
 </script>
 

@@ -6,45 +6,9 @@ const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 <template>
   <div id="calendarContainer">
     <div v-for="index in 12" :key="index-1"> {{ monthNames[index - 1] }}
-      <MiniCalendar :month="1" />
+      <MiniCalendar :month="index - 1" />
     </div>
   </div>
-<!--  <div> January-->
-<!--  <MiniCalendar v-bind:month="month" />-->
-<!--  </div>-->
-<!--  <div> February-->
-<!--    <MiniCalendar :month=1 />-->
-<!--  </div>-->
-<!--  <div> March-->
-<!--    <MiniCalendar :month=2 />-->
-<!--  </div>-->
-<!--  <div> April-->
-<!--    <MiniCalendar :month=3 />-->
-<!--  </div>-->
-<!--  <div> May-->
-<!--    <MiniCalendar :month=4 />-->
-<!--  </div>-->
-<!--  <div> June-->
-<!--    <MiniCalendar :month=5 />-->
-<!--  </div>-->
-<!--  <div> July-->
-<!--    <MiniCalendar :month=6 />-->
-<!--  </div>-->
-<!--  <div> August-->
-<!--    <MiniCalendar :month=7 />-->
-<!--  </div>-->
-<!--  <div> September-->
-<!--    <MiniCalendar :month=8 />-->
-<!--  </div>-->
-<!--  <div> October-->
-<!--    <MiniCalendar :month=9 />-->
-<!--  </div>-->
-<!--  <div> November-->
-<!--    <MiniCalendar :month=10 />-->
-<!--  </div>-->
-<!--  <div> December-->
-<!--    <MiniCalendar :month=11 />-->
-<!--  </div>-->
 </template>
 
 <style>
