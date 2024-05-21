@@ -1,7 +1,7 @@
 <script setup>
-import LeftArr from '../icons/LeftArrow.vue';
-import RightArr from '../icons/RightArrow.vue';
-import store from '../../store';
+import LeftArr from '../../icons/LeftArrow.vue';
+import RightArr from '../../icons/RightArrow.vue';
+import store from '../../../store.js';
 import { computed } from 'vue';
 
 async function updateDate(num) {

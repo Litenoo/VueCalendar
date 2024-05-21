@@ -1,5 +1,5 @@
 <script setup>
-import Search from '../icons/Search.vue';
+import Search from '../../icons/Search.vue';
 </script>
 
 <template>

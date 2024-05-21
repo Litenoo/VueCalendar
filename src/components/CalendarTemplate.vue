@@ -1,9 +1,9 @@
 <script setup>
 
-import WeekGrid from './mainContent/Week.vue';
-import DayGrid from './mainContent/Day.vue';
-import MonthGrid from './mainContent/Month.vue';
-import YearGrid from './mainContent/Year.vue';
+import WeekGrid from '@/components/calendarComponents/Week.vue';
+import DayGrid from '@/components/calendarComponents/Day.vue';
+import MonthGrid from '@/components/calendarComponents/Month.vue';
+import YearGrid from '@/components/calendarComponents/Year.vue';
 import store from '../store';
 
 </script>

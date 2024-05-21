@@ -1,7 +1,7 @@
 <script setup>
-import TrashIcon from '../icons/Trash.vue';
 import {computed} from "vue";
-import store from '../../store.js';
+import store from '../../../store.js';
+import Bars from '../../icons/taskResizeBars.vue'
 
 const props = defineProps({
   task: Object,
@@ -30,30 +30,34 @@ function deleteTask(taskId) {
 }
 
 function addTask(task) {
-  // store.dispatch("addTask");
+  // store.dispatch("addTask", task);
 }
 
 function updateTask(task) {
   // store.dispatch("updateTask");
 }
+
+function updateDuration(event) {
+  props.task.endCoord = Math.floor((event.clientY - rect.top)/48*4);
+}
+
 </script>
 
 <template>
   <div class="task" :style="{ backgroundColor: task.color, marginTop: size.start, height: size.end }">
     <div>
-      <div>
-        <div class="taskTitle" v-if="task.title">{{ task.title }}</div>
-        <div v-else class="titleInpContainer"><input type="text" placeholder="Title" class="titleInput"></div>
+      <div class="topInfo">
+        <Bars />
+        <div class="taskTitle" >{{ task.title }}</div>
       </div>
       <div class="durationText">{{ `${duration.startTime} - ${duration.endTime}` }}</div>
     </div>
     <div class="bottomTaskSection">
-      <div></div>
-      <TrashIcon @click="deleteTask()" class="icon"/>
+      <Bars />
     </div>
   </div>
 </template>
-<!--cursor: row-resize/col-resize ;-->
+<!-- cursor: row-resize/col-resize ;-->
 <style scoped>
 .task {
   width: 100%;
@@ -63,29 +67,16 @@ function updateTask(task) {
   transition: 0.1s;
   user-select: none;
   box-sizing: border-box;
-  padding: 3px;
+  padding: 0 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  cursor: row-resize;
 }
 
 .bottomTaskSection {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-end;
-}
-
-.icon {
-  cursor: pointer;
-  transition: 0.2s;
-  border-radius: 6px;
-}
-
-.icon:hover {
-  background: #5d5d5d23;
-  transition: 0.2s;
-  border-radius: 6px;
 }
 
 .durationText {
@@ -96,15 +87,8 @@ function updateTask(task) {
 .taskTitle {
   font-size: 16px;
 }
-.titleInput{
-  background: rgba(0,0,0, 0.05);
-  border: 1px solid black;
-}
-.titleInput:active{
-  outline: none;
-  border: 1px solid black
-}
-.titleInpContainer{
+.topInfo{
   display: flex;
+  justify-content: center;
 }
 </style>

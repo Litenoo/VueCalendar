@@ -2,8 +2,8 @@ import {createWebHistory, createRouter} from 'vue-router';
 
 const routes = [
   {path: '/', component: ()=>import('./mainComponents/Calendar.vue')},
-  {path: '/login', component: ()=>import('./components/mainContent/Login.vue')},
-  {path: '/register', component: ()=>import('./components/mainContent/Register.vue')},
+  {path: '/loginRegister', component: ()=>import('@/components/loginRegister/Login.vue')},
+  {path: '/register', component: ()=>import('./components/loginRegister/Register.vue')},
   {path: '/options', component:  ()=>import('./mainComponents/Options.vue')},
   {path: '/passwordRecovery', component:  ()=>import('./mainComponents/PasswordRecovery.vue')},
   {path: '/changePassword', component: ()=>import('./mainComponents/ChangePassword.vue')},
@@ -30,12 +30,12 @@ router.beforeEach(async (to, from, next) => {
       });
       console.log('response :', response);
       if (!response.ok) {
-        next('/login');
+        next('/loginRegister');
       } else {
         next();
       }
     }else{
-      if (to.path !== '/login' && to.path !== '/register' && to.path !== '/passwordRecovery' && to.path !== '/changePassword') { //dev /changePassword is useless
+      if (to.path !== '/loginRegister' && to.path !== '/register' && to.path !== '/passwordRecovery' && to.path !== '/changePassword') { //dev /changePassword is useless
         const response = await fetch('http://localhost:3000/userData', {
           method: 'POST',
           credentials: 'include',
@@ -47,7 +47,7 @@ router.beforeEach(async (to, from, next) => {
         });
 
         if (!response.ok) {
-          next('/login');
+          next('/loginRegister');
         } else {
           next();
         }
@@ -57,7 +57,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } catch (err) {
     console.log(err);
-    next('/login');
+    next('/loginRegister');
   }
 });
 

@@ -1,5 +1,5 @@
 <script setup>
-import store from '../../store';
+import store from '../../../store.js';
 import { ref, watch } from 'vue';
 
 const viewMode = ref('Week');

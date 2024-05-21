@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from 'vue';
-  const fillColor = ref('#505050')
+  const fillColor = ref('#505050');
 </script>
 
 <template>

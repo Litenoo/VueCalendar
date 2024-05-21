@@ -1,6 +1,6 @@
 <script setup>
-import LeftOptions from './topBar/LeftOptions.vue'
-import RightOptions from './topBar/RightOptions.vue'
+import LeftOptions from '@/components/calendarComponents/topBar/LeftOptions.vue'
+import RightOptions from '@/components/calendarComponents/topBar/RightOptions.vue'
 
 function hideLeftBar() {
 

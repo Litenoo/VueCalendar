@@ -9,7 +9,7 @@ const email = defineModel('email');
 
 async function submitForm() {
   store.dispatch("recoveryPassword", {email: email.value});
-  await router.push('/login');
+  await router.push('/loginRegister');
 }
 </script>
 

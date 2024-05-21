@@ -66,7 +66,7 @@ const store = createStore({
       state.auth.username = username;
       state.auth.email = email;
     },
-    //Error messages in login/register/recovery views mutations
+    //Error messages in loginRegister/register/recovery views mutations
     setErrorMsg(state, msg){
       console.log('seterrorMSG data : ', msg);
       state.auth.errorMessage = msg;
@@ -98,7 +98,7 @@ const store = createStore({
       });
       const data = await response.json();
       if(data.errorMessage){
-        console.log('login error : ', data.errorMessage);
+        console.log('loginRegister error : ', data.errorMessage);
         commit("setErrorMsg", data.errorMessage);
       }else{
         await router.push('/');

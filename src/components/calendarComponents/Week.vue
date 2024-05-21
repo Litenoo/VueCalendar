@@ -1,5 +1,5 @@
 <script setup>
-import GridColumn from './GridColumn.vue';
+import GridColumn from './TaskManagement/GridColumn.vue';
 import HoursColumn from './HoursDisplay.vue';
 import store from '../../store';
 import { computed, toRaw } from 'vue';

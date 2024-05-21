@@ -20,12 +20,12 @@ async function submitForm() {
   if(urlParams.has('token')){
     token = urlParams.get('token');
   }else{ //probably useless but safe.
-    await router.push("/login");
+    await router.push("/loginRegister");
   }
 
   if(password.value === passwordRepeat.value){
     await store.dispatch("changePassword", {password : password.value, token : token});
-    await router.push("/login");
+    await router.push("/loginRegister");
   }else{
     errorMessage.value = 'Please check if you entered same password twice.';
   }

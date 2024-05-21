@@ -1,7 +1,7 @@
 <script setup>
-import MiniCalendar from './leftBar/MiniCalendar.vue';
-import Nav from './topBar/Nav.vue';
-import ViewSelect from './leftBar/ViewSelect.vue';
+import MiniCalendar from '@/components/calendarComponents/leftBar/MiniCalendar.vue';
+import Nav from '@/components/calendarComponents/topBar/Nav.vue';
+import ViewSelect from '@/components/calendarComponents/leftBar/ViewSelect.vue';
 
 
 </script>

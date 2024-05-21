@@ -1,5 +1,5 @@
 <script setup>
-import Gear from '../icons/Gear.vue';
+import Gear from '../../icons/Gear.vue';
 import SearchBar from './SearchBar.vue';
 import { RouterLink } from 'vue-router';
 </script>

@@ -1,7 +1,7 @@
 <script setup>
 
 import { computed } from 'vue';
-import store from '../../store';
+import store from '../../../store.js';
 
 function createCalendar(year, month) {
   console.log('creating minimonth with month : ', month, 'year :', year);

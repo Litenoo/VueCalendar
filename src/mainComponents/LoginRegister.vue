@@ -1,6 +1,6 @@
 <script setup>
-import Login from '../components/mainContent/Login.vue';
-import Register from '../components/mainContent/Register.vue';
+import Login from '@/components/loginRegister/Login.vue';
+import Register from '../components/loginRegister/Register.vue';
 import store from '../store.js';
 </script>
 

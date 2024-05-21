@@ -1,5 +1,5 @@
 <script setup>
-import TopBar from '../components/OptionViewComponents/TopBar.vue';
+import TopBar from '@/components/optionViewComponents/TopBar.vue';
 import LeftBar from '../components/LeftBar.vue';
 </script>
 

@@ -1,6 +1,6 @@
 <script setup>
-import Bars from '../icons/Bars.vue';
-import store from "../../store.js";
+import Bars from '../../icons/Bars.vue';
+import store from "../../../store.js";
 
 function hideLeftBar() {
   store.commit("SwitchLBar");
@@ -11,7 +11,7 @@ function hideLeftBar() {
 <template>
   <div id="container">
   <button class="topOption" @click="hideLeftBar">
-    <Bars />
+    <Bars/>
   </button>
   <div id="brand"><img src="" alt="">Calendar</div>
 </div>
