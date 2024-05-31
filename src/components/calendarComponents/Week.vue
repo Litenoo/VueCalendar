@@ -8,11 +8,13 @@ store.dispatch("changeDay", 0)
 
 let weekDaysN = computed(()=> {
   let rawData = store.state.date.display;
-  rawData = toRaw(rawData)
+  rawData = toRaw(rawData);
   let res = []
   for(let i = 0; i < 7; i++){
     res.push(rawData[i]);
   }
+  //fetch for tiles
+  store.dispatch("fetchTasks", {days : rawData, month : store.state.date._month})
   return res;
 });
 </script>
@@ -27,9 +29,8 @@ let weekDaysN = computed(()=> {
     </div>
     <div id="mainGrid">
       <HoursColumn />
-      <!-- Instead of GridColumn moultiple times make v-for -->
-      <div v-for="index in 7" :key="index">
-        <GridColumn />
+      <div v-for="day in weekDaysN">
+        <GridColumn :day="day" />
       </div>
     </div>
   </div>

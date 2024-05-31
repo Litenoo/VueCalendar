@@ -181,6 +181,32 @@ const store = createStore({
       }
     },
     //tasks
+    async fetchTasks({state}, dateData){
+      const date = {days : dateData.days, date : dateData.month}
+      console.log('fetching tasks :', date);
+      try{
+        const rawTasks = await fetch("http://localhost:3000/getTasksList", {
+          method: 'POST',
+          credentials: 'include',
+          sameSite: 'strict',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:5173',
+            'Cookie': 'sameSite=strict',
+          },
+          body: JSON.stringify({date}),
+        });
+        let taskList = await rawTasks.json();
+        console.log(taskList);
+        //check if it could not be in mutations
+        // taskList.forEach((element)=>{
+        //   state.tasks.push(element)
+        // })
+      }catch(err){
+        //dev handle with winston
+        console.log(err);
+      }
+    },
     async addTask(state, task){
       try{
         await fetch('http://localhost:3000/addTask', {
@@ -232,7 +258,6 @@ const store = createStore({
         console.log(err);
       }
     }
-
   },
 });
 

@@ -4,6 +4,9 @@ import TaskComp from './Task.vue';
 import store from '../../../store.js';
 import TaskCreation from "./TaskCreation.vue";
 
+const props = defineProps({
+  day:Number,
+});
 const taskList = ref([]);
 
 let mouseDetect = ref(null);
@@ -11,18 +14,23 @@ let taskCreateUI = false;
 let start;
 
 class Task{
-  constructor(_startCoord, _endCoord){
-    this.date = {day: new Date().getDate(), month: new Date().getMonth()};
-    this.size = {start:'0px', end:'0px'};
-    this.startCoord = _startCoord;
-    this.endCoord = _endCoord;
-    this.color = '#08CCAA';
-    this.title = null;
+  constructor(_startCoord, _endCoord, _title, _color){
+    this.date = {day: new Date().getDate(), month: new Date().getMonth(), year: new Date().getFullYear()};
+    this.duration = {start: _startCoord, end: _endCoord};
+    this.color = _color;
+    this.title = _title;
+    this.priority = 0;
+    this.status = 0;
   }
 }
 
+store.state.tasks.forEach((element)=>{
+  console.log(element);
+})
+
 function createTile(startPoint, endPoint){
-  const task = new Task(startPoint, endPoint, 'Title', '12-14', '#1be460');
+  const task = new Task(startPoint, endPoint, 'Title', '#08CCAA');
+  console.log("frontend task temp :", task);
   taskList.value.push(task);
 }
 
@@ -36,7 +44,7 @@ async function updateTask(event) {
     const rect = mouseDetect._value.getBoundingClientRect();
     let task = taskList.value[taskList.value.length - 1]; //put id of one of tasks in here
     if(task){
-      task.endCoord = Math.floor((event.clientY - rect.top)/48*4);
+      task.duration.end = Math.floor((event.clientY - rect.top)/48*4);
     }
 }
 
@@ -51,7 +59,7 @@ function mouseUp(event){
 }
 
 function taskCommited(){ //this function will trigger task editing input to the right
-  console.log('endTask');
+  console.log('endTask', taskList.value);
 }
 
 let beforeCoords = {y:0}; //x probably will be needed in future for moving by grids

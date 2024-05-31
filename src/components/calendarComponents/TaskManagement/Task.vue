@@ -1,22 +1,26 @@
 <script setup>
-import {computed} from "vue";
+import {computed, watch} from "vue";
 import store from '../../../store.js';
 
 const props = defineProps({
   task: Object,
 });
 
+// watch(props.task.commitEvent.value, ()=>{
+//   console.log('event commit commited in Task.vue', props.task.commitEvent.value);
+// });
+
 const size = computed(() => {
   return {
-    start: props.task.startCoord * 12 + "px",
-    end: (props.task.endCoord * 12) - props.task.startCoord * 12 + "px",
+    start: props.task.duration.start * 12 + "px",
+    end: (props.task.duration.end * 12) - props.task.duration.start * 12 + "px",
   }
 });
 
 const duration = computed(() => {
   return {
-    startTime: (Math.floor(props.task.startCoord / 4) + ((props.task.startCoord / 4) % 1) * 0.6).toFixed(2),
-    endTime: (Math.floor(props.task.endCoord / 4) + ((props.task.endCoord / 4) % 1) * 0.6).toFixed(2),
+    startTime: (Math.floor(props.task.duration.start / 4) + ((props.task.duration.start / 4) % 1) * 0.6).toFixed(2),
+    endTime: (Math.floor(props.task.duration.end / 4) + ((props.task.duration.end / 4) % 1) * 0.6).toFixed(2),
   }
 });
 
@@ -24,20 +28,8 @@ const duration = computed(() => {
 //   console.log('Small task'); // change class of task here.
 // }
 
-function deleteTask(taskId) {
-  // store.dispatch("deleteTask");
-}
-
-function addTask(task) {
-  // store.dispatch("addTask", task);
-}
-
-function updateTask(task) {
-  // store.dispatch("updateTask");
-}
-
 function updateDuration(event) {
-  props.task.endCoord = Math.floor((event.clientY - rect.top)/48*4);
+  props.task.duration.end = Math.floor((event.clientY - rect.top)/48*4);
 }
 
 </script>
@@ -68,12 +60,6 @@ function updateDuration(event) {
   justify-content: space-between;
 }
 
-.bottomTaskSection {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
-
 .durationText {
   opacity: 0.8;
   font-size: 13px;
@@ -82,8 +68,10 @@ function updateDuration(event) {
 .taskTitle {
   font-size: 16px;
 }
+
 .topInfo{
   display: flex;
   justify-content: center;
 }
+
 </style>
