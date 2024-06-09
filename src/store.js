@@ -182,7 +182,7 @@ const store = createStore({
     },
     //tasks
     async fetchTasks({state}, dateData){
-      const date = {days : dateData.days, date : dateData.month}
+      const date = {days : dateData.days, date : dateData.month};
       console.log('fetching tasks :', date);
       try{
         const rawTasks = await fetch("http://localhost:3000/getTasksList", {
@@ -196,8 +196,10 @@ const store = createStore({
           },
           body: JSON.stringify({date}),
         });
-        let taskList = await rawTasks.json();
-        console.log(taskList);
+        state.tasks = await rawTasks.json();
+        state.tasks.forEach(task => {
+          console.log("vuexTask", state.tasks);
+        })
         //check if it could not be in mutations
         // taskList.forEach((element)=>{
         //   state.tasks.push(element)

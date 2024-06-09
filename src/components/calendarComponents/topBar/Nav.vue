@@ -8,10 +8,10 @@ async function updateDate(num) {
   if (props.global === true) {
     switch (store.state.date.viewMode) {
       case "One-day":
-        store.dispatch("changeDay", num);
+        await store.dispatch("changeDay", num);
         break;
       case "Week":
-        store.dispatch("changeDay", 7 * num);
+        await store.dispatch("changeDay", 7 * num);
         break;
       case "Month":
         store.commit("changeMonth", num);

@@ -2,19 +2,20 @@
 import GridColumn from './TaskManagement/GridColumn.vue';
 import HoursColumn from './HoursDisplay.vue';
 import store from '../../store';
-import { computed, toRaw } from 'vue';
+import { ref, computed, toRaw } from 'vue';
 
-store.dispatch("changeDay", 0)
+store.dispatch("changeDay", 0);
 
 let weekDaysN = computed(()=> {
   let rawData = store.state.date.display;
   rawData = toRaw(rawData);
-  let res = []
+  console.log("rawData : ",  rawData)
+  let res = [];
   for(let i = 0; i < 7; i++){
-    res.push(rawData[i]);
+    // console.log("Loop, ", ref(rawData[i]))
+    res.push(ref(rawData[i]));
   }
-  //fetch for tiles
-  store.dispatch("fetchTasks", {days : rawData, month : store.state.date._month})
+  store.dispatch("fetchTasks", {days : rawData, month : store.state.date._month});
   return res;
 });
 </script>
