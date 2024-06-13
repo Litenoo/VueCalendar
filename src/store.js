@@ -209,9 +209,10 @@ const store = createStore({
         console.log(err);
       }
     },
-    async addTask(state, task){
+    async pushTask(state, task){
+      console.log("pushing task :", task)
       try{
-        await fetch('http://localhost:3000/addTask', {
+        await fetch('http://localhost:3000/pushTask', {
           method: 'POST',
           credentials: 'include',
           sameSite: 'strict',

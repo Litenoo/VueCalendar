@@ -2,6 +2,7 @@
 import MiniCalendar from '@/components/calendarComponents/leftBar/MiniCalendar.vue';
 import Nav from '@/components/calendarComponents/topBar/Nav.vue';
 import ViewSelect from '@/components/calendarComponents/leftBar/ViewSelect.vue';
+import TaskTemplateCreator from "@/components/calendarComponents/leftBar/TaskTemplateCreator.vue";
 
 
 </script>
@@ -11,6 +12,7 @@ import ViewSelect from '@/components/calendarComponents/leftBar/ViewSelect.vue';
     <Nav global:false />
     <MiniCalendar globalDisplay />
     <ViewSelect />
+    <TaskTemplateCreator/>
   </div>
 </template>
 
