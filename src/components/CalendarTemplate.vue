@@ -10,7 +10,7 @@ import store from '../store';
 
 <template>
   <div id="calendar">
-    <DayGrid v-if="store.state.date.viewMode === 'One-day'" />
+    <DayGrid v-if="store.state.date.viewMode === 'Day'" />
     <WeekGrid v-else-if="store.state.date.viewMode === 'Week'" />
     <MonthGrid v-else-if="store.state.date.viewMode === 'Month'" />
     <YearGrid v-else />

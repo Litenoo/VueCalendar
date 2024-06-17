@@ -47,9 +47,8 @@ function updateDuration(event) {
 <!-- cursor: row-resize/col-resize ;-->
 <style scoped>
 .task {
-  width: 100%;
+  width: 90%;
   border-radius: 4px;
-  border: 1px solid #5d5d5d;
   position: absolute;
   transition: 0.1s;
   user-select: none;
@@ -58,6 +57,7 @@ function updateDuration(event) {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 2px 2px 1px #3d3d3d;
 }
 
 .durationText {

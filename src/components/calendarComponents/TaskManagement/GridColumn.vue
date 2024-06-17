@@ -111,6 +111,7 @@ const mouseMove = (event) => {
   background-image: linear-gradient(to bottom, #a1a1a1 1px, transparent 1px);
   background-size: 100% 48px;
   position: relative;
+  border-right: 1px solid #a1a1a1;
 }
 
 #taskGrid {
