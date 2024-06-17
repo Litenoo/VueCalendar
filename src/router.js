@@ -35,25 +35,7 @@ router.beforeEach(async (to, from, next) => {
         next();
       }
     }else{
-      if (to.path !== '/loginRegister' && to.path !== '/register' && to.path !== '/passwordRecovery' && to.path !== '/changePassword') { //dev /changePassword is useless
-        const response = await fetch('http://localhost:3000/userData', {
-          method: 'POST',
-          credentials: 'include',
-          sameSite: 'strict',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:5173',
-          },
-        });
-
-        if (!response.ok) {
-          next('/loginRegister');
-        } else {
-          next();
-        }
-      } else {
-        next();
-      }
+      next();
     }
   } catch (err) {
     console.log(err);

@@ -6,17 +6,14 @@ import store from '../../../store.js';
 function createCalendar(year, month) {
   console.log('creating minimonth with month : ', month, 'year :', year);
   function getTotalDays(yr, mnt) {
-    const lastDay = new Date(yr, mnt + 1, 0).getDate();
-    return lastDay;
+    return new Date(yr, mnt + 1, 0).getDate();
   }
 
   const calendar = [];
 
   const currentDate = new Date(year, month);
   let startDay = currentDate.getDay();
-  if(startDay === 0){
-    startDay = 7;
-  }
+  if(startDay === 0){ startDay = 7; }
   let today = currentDate.getDate();
 
   let monthLength = getTotalDays(year, month);

@@ -1,22 +1,65 @@
 <script setup>
 import store from '../../../store.js';
-import { ref, watch } from 'vue';
+import {ref} from 'vue';
 
-const viewMode = ref('Week');
+const options = ["Day", "Week", "Month", "Year"];
 
-watch(()=>{
-  return viewMode.value;
-}, ()=>{
-  store.commit("updateViewMode", viewMode);
-})
+let selected = ref(1);
 
+function changeView(value) {
+  selected.value = value;
+  store.commit("updateViewMode", options[value]);
+}
 </script>
 
 <template>
-  <select name="selectView" id="selectView" v-model="viewMode">
-    <option>One-day</option>
-    <option>Week</option>
-    <option>Month</option>
-    <option>Year</option>
-  </select>
+    <div class="viewSelect">
+      <div
+          class="option"
+          v-for="(option, index) in options"
+          :key="index"
+          :class="{'selected': selected === index, 'option': selected !== index}"
+          @click="changeView(index)"
+      >
+        {{ option }}
+      </div>
+    </div>
+
 </template>
+
+<style scoped>
+.viewSelect {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.option {
+  width: 56px;
+  text-align: center;
+  font-size: 14px;
+  background: #f3f3f3;
+  padding: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: 0.4s;
+  border-top: 1px solid #a1a1a1;
+  border-bottom: 1px solid #a1a1a1;
+  border-right: 1px solid #a1a1a1;
+}
+
+.viewSelect :first-child {
+  border-left: 1px solid #a1a1a1;
+}
+
+.selected {
+  padding: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: #28c266;
+  transition: 0.4s;
+}
+</style>

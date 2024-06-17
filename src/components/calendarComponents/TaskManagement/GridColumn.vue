@@ -2,8 +2,6 @@
 import {computed, ref, watch} from "vue";
 import TaskComp from './Task.vue';
 import store from '../../../store.js';
-import TaskCreation from "./TaskCreation.vue";
-import {onUpdated} from "@vue/runtime-dom";
 
 const props = defineProps({
   day: Object,
@@ -96,7 +94,6 @@ const mouseMove = (event) => {
         @mouseup="mouseUp($event); taskCommited()"
         @mousemove="mouseMove($event)"
     >
-      <TaskCreation v-if="taskCreateUI"/>
       <TaskComp v-for="(task, index) in taskList" :task="taskList[index]" @mousedown.stop></TaskComp>
     </div>
   </div>
@@ -111,6 +108,7 @@ const mouseMove = (event) => {
   background-image: linear-gradient(to bottom, #a1a1a1 1px, transparent 1px);
   background-size: 100% 48px;
   position: relative;
+  border-right: 1px solid #a1a1a1;
 }
 
 #taskGrid {

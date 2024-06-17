@@ -3,6 +3,8 @@ import {computed} from "vue";
 import store from '../../../store.js';
 import Bars from '../../icons/taskResizeBars.vue'
 
+// Not sure if this file is still needed.
+
 const props = defineProps({
   task: Object,
 });

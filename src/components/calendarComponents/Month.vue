@@ -70,6 +70,11 @@ let calendar = computed(() => createCalendar(store.state.date._year, store.state
   height: 100%;
   width: 100%;
   overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+#monthDays::-webkit-scrollbar {
+  display: none;
 }
 
 .miniDay {

@@ -1,14 +1,9 @@
 <script setup>
 import {computed} from "vue";
-import store from '../../../store.js';
 
 const props = defineProps({
   task: Object,
 });
-
-// watch(props.task.commitEvent.value, ()=>{
-//   console.log('event commit commited in Task.vue', props.task.commitEvent.value);
-// });
 
 const size = computed(() => {
   return {
@@ -23,10 +18,6 @@ const duration = computed(() => {
     endTime: (Math.floor(props.task.duration.end / 4) + ((props.task.duration.end / 4) % 1) * 0.6).toFixed(2),
   }
 });
-
-// if(props.task.startCoord - props.task.endCoord > 3){ //that works, but it has to be activated only when task is commited.
-//   console.log('Small task'); // change class of task here.
-// }
 
 function updateDuration(event) {
   props.task.duration.end = Math.floor((event.clientY - rect.top)/48*4);
@@ -47,9 +38,8 @@ function updateDuration(event) {
 <!-- cursor: row-resize/col-resize ;-->
 <style scoped>
 .task {
-  width: 100%;
+  width: 90%;
   border-radius: 4px;
-  border: 1px solid #5d5d5d;
   position: absolute;
   transition: 0.1s;
   user-select: none;
@@ -58,6 +48,7 @@ function updateDuration(event) {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 2px 2px 1px #3d3d3d;
 }
 
 .durationText {

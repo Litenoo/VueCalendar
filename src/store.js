@@ -55,6 +55,7 @@ const store = createStore({
       }
     },
     updateViewMode(state, newMode) {
+      console.log("UpdateViewMode store :", newMode)
       state.date.viewMode = newMode;
     },
     getTotalDays(yr, mnt) { // consider using it in actions instead of repeating one line of code moultiple times

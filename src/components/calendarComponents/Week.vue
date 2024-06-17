@@ -5,6 +5,7 @@ import store from '../../store';
 import { ref, computed, toRaw } from 'vue';
 
 store.dispatch("changeDay", 0);
+const weekDays = ["Monday", "Wednesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 let weekDaysN = computed(()=> {
   let rawData = store.state.date.display;
@@ -23,9 +24,9 @@ let weekDaysN = computed(()=> {
 <template>
   <div id="gridContainer">
     <div class="columnGrid">
-      <div class="dayName" v-for="day in weekDaysN">
+      <div class="dayName" v-for="(day, index) in weekDaysN">
         <span class="monthDay">{{ day }}</span>
-        <!-- <span class="weekDay">{{ day.weekDay }}</span> -->
+        <span class="weekDay">{{ weekDays[index] }}</span>
       </div>
     </div>
     <div id="mainGrid">

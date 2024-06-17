@@ -41,9 +41,9 @@ function quartersToHours(numOfQuarters){
 </script>
 
 <template>
+<!--  DEV change design of that form and make different hour selecting system.  -->
   <form @submit.prevent="submitTask">
-    Task creating :
-    <input required type="text" placeholder="title" name="title" v-model="title">
+    <input required type="text" placeholder="Title" name="title" v-model="title">
     <input required type="date" placeholder="date" name="date" v-model="date">
     <select required name="durationStart" id="durationStart" v-model="durationStart">
       <option v-for="(hour, index) in timeIntervals" :value=gridSnapPoints[index]>{{ hour }}</option>
