@@ -14,7 +14,7 @@ async function updateDate(num) {
         await store.dispatch("changeDay", 7 * num);
         break;
       case "Month":
-        store.commit("changeMonth", num);
+        store.dispatch("changeMonth", num);
         break;
     }
   }else{
@@ -54,7 +54,7 @@ if (props.global === true) {
         <RightArr :height="size || 18" @click="updateDate(1)" />
       </div>
     </div>
-    <span id="selectedDate" :font-size="size || 25">
+    <span id="selectedDate">
       <span v-if="store.state.date.view !== 'Year' && !props.global || props.global">
         {{ dateToDisplay }}
       </span>

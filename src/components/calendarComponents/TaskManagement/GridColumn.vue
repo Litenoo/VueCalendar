@@ -23,7 +23,6 @@ watch(()=> props.day, (newDay) => { //Make valid also for current month and year
 
 
 let mouseDetect = ref(null);
-let taskCreateUI = false;
 let start;
 
 class Task {
@@ -40,6 +39,7 @@ class Task {
 function createTile(startPoint, endPoint) { // handle backend action
   const task = new Task(startPoint, endPoint, 'Title', '#08CCAA');
   taskList.value.push(task);
+  console.log("new task : ", task)
 }
 
 async function initTask(event) {

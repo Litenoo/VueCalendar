@@ -3,6 +3,8 @@ import router from './router.js';
 
 const acctualDate = new Date();
 
+//dev Make a couple of smaller files to enhance quality of code.
+
 const store = createStore({
   state() {
     return {
@@ -41,26 +43,11 @@ const store = createStore({
         state.date._miniYear++;
       }
     },
-    changeMonth(state, num) {
-
-      state.date._month += num;
-
-      if (state.date._month < 1) {
-        state.date._month = 12;
-        state.date._year--;
-      }
-      if (state.date._month > 12) {
-        state.date._month = 1;
-        state.date._year++;
-      }
-    },
     updateViewMode(state, newMode) {
-      console.log("UpdateViewMode store :", newMode)
       state.date.viewMode = newMode;
     },
     getTotalDays(yr, mnt) { // consider using it in actions instead of repeating one line of code moultiple times
-      const lastDay = new Date(yr, mnt + 1, 0).getDate();
-      return lastDay;
+      return new Date(yr, mnt + 1, 0).getDate();
     },
     //Account system mutations
     setUserData(state, username, email) {
@@ -69,7 +56,7 @@ const store = createStore({
     },
     //Error messages in loginRegister/register/recovery views mutations
     setErrorMsg(state, msg){
-      console.log('seterrorMSG data : ', msg);
+      console.log('error msg data : ', msg);
       state.auth.errorMessage = msg;
     },
     clearErrorMsg(state){
@@ -159,6 +146,19 @@ const store = createStore({
       }
     },
     //Calendar system actions
+    async changeMonth({state}, num) {
+      state.date._month += num;
+
+      if (state.date._month < 1) {
+        state.date._month = 12;
+        state.date._year--;
+      }
+      if (state.date._month > 12) {
+        state.date._month = 1;
+        state.date._year++;
+      }
+      await store.dispatch("fetchTasks");
+    },
     changeDay({state, commit}, num) {
       state.date._day += num;
 
@@ -182,11 +182,13 @@ const store = createStore({
       }
     },
     //tasks
-    async fetchTasks({state}, dateData){
-      const date = {days : dateData.days, date : dateData.month};
-      console.log('fetching tasks :', date);
+    async loadTasks({state}, days){ //used to load tasks from local vuex tasks variable
+
+    },
+    async fetchTasks({state}){ //fetches tasks from server
+      console.log('fetching tasks for month :', state.date._month); //dev handle to return next and before month on backend.
       try{
-        const rawTasks = await fetch("http://localhost:3000/getTasksList", {
+        const rawTasks = await fetch("http://localhost:3000/tasksFetch", {
           method: 'POST',
           credentials: 'include',
           sameSite: 'strict',
@@ -195,23 +197,20 @@ const store = createStore({
             'Access-Control-Allow-Origin': 'http://localhost:5173',
             'Cookie': 'sameSite=strict',
           },
-          body: JSON.stringify({date}),
+          body: JSON.stringify({
+            month: state.date._month,
+            year: state.date._year,
+          }),
         });
-        state.tasks = await rawTasks.json();
-        state.tasks.forEach(task => {
-          console.log("vuexTask", state.tasks);
-        })
-        //check if it could not be in mutations
-        // taskList.forEach((element)=>{
-        //   state.tasks.push(element)
-        // })
+        const taskList = await rawTasks.json();
+        console.log("response from fetchTasks :", taskList);
+
       }catch(err){
-        //dev handle with winston
         console.log(err);
       }
     },
     async pushTask(state, task){
-      console.log("pushing task :", task)
+      console.log("pushing task :", task);
       try{
         await fetch('http://localhost:3000/pushTask', {
           method: 'POST',
@@ -228,41 +227,9 @@ const store = createStore({
         console.log(err);
       }
     },
-    async deleteTask(state, task){
-      try{
-        await fetch('http://localhost:3000/deleteTask', {
-          method: 'POST',
-          credentials: 'include',
-          sameSite: 'strict',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:5173',
-            'Cookie': 'sameSite=strict',
-          },
-          body: JSON.stringify({task}),
-        });
-      }catch(err){
-        console.log(err);
-      }
-    },
-    async updateTask(state, task){
-      try{
-        await fetch('http://localhost:3000/updateTask', {
-          method: 'POST',
-          credentials: 'include',
-          sameSite: 'strict',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:5173',
-            'Cookie': 'sameSite=strict',
-          },
-          body: JSON.stringify({task}),
-        });
-      }catch(err){
-        console.log(err);
-      }
-    }
   },
 });
+
+
 
 export default store;

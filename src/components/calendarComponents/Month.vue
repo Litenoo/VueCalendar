@@ -4,7 +4,7 @@ import { computed } from 'vue';
 import store from '../../store';
 
 function createCalendar(year, month) {
-  console.log("CREATING CALENDAR with date year: " + year + "and month : " + month);
+  // console.log("CREATING CALENDAR with date year: " + year + "and month : " + month); DEV
   function getTotalDays(yr, mnt) {
     const lastDay = new Date(yr, mnt + 1, 0).getDate();
     return lastDay;

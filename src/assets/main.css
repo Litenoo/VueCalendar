@@ -148,6 +148,7 @@ form input[type = submit] {
     background: #44c677;
     transition: 0.5s;
 }
+
 form input[type = submit]:hover {
     box-shadow: 0 1px 7px black;
     background: #2bbf65;
@@ -165,21 +166,25 @@ form input[type = submit]:hover {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.errorMessage{
+
+.errorMessage {
     color: #b30000;
     font-size: 14px;
 }
-.termsOfUse{
+
+.termsOfUse {
     display: flex;
     padding: 6px;
     font-size: 12px;
     align-items: center;
     justify-content: center;
 }
-.checkbox{
+
+.checkbox {
     width: 14px;
 }
-label{
+
+label {
     font-size: 12px;
 }
 
@@ -191,6 +196,7 @@ label{
     border-bottom: 1px solid #d1d1d1;
 
 }
+
 #mainGrid::-webkit-scrollbar {
     display: none;
 }
@@ -209,7 +215,7 @@ label{
     align-items: center;
 }
 
-.weekDay{
+.weekDay {
     font-size: 13px;
     color: #a1a1a1;
 }
@@ -223,26 +229,14 @@ label{
     /* change its name */
     width: 100%;
 }
-.separator{
+
+.separator {
     border-bottom: 1px solid #a5a5a5;
     margin: 4px;
     padding-bottom: 4px;
 }
 
-.lightText{
+.lightText {
     font-size: 16px;
     color: #5d5d5d;
-}
-
-.hidden-scrollbar::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
-.hidden-scrollbar {
-    scrollbar-width: none; /* For Firefox */
-}
-
-.hidden-scrollbar {
-    -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }

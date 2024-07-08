@@ -1,21 +1,15 @@
 <script setup>
 import TopBar from '@/components/optionViewComponents/TopBar.vue';
-import LeftBar from '../components/LeftBar.vue';
 </script>
 
 <template>
-  <div id="app">
+  <div id="options">
     <TopBar />
   </div>
 </template>
 
 <style scoped>
-#mainContent {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-}
-#app{
+#options{
   height: 100vh;
   overflow: hidden;
 }

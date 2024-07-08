@@ -10,7 +10,6 @@ const weekDays = ["Monday", "Wednesday", "Wednesday", "Thursday", "Friday", "Sat
 let weekDaysN = computed(()=> {
   let rawData = store.state.date.display;
   rawData = toRaw(rawData);
-  console.log("rawData : ",  rawData)
   let res = [];
   for(let i = 0; i < 7; i++){
     // console.log("Loop, ", ref(rawData[i]))
