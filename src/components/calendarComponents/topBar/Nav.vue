@@ -14,7 +14,7 @@ async function updateDate(num) {
         await store.dispatch("changeDay", 7 * num);
         break;
       case "Month":
-        store.dispatch("changeMonth", num);
+        await store.dispatch("changeMonth", num);
         break;
     }
   }else{

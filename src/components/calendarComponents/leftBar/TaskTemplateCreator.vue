@@ -15,10 +15,10 @@ function submitTask() {
   const durationStart = Number(startHrs.value + startMin.value)*4;
   const durationEnd = Number(endHrs.value + endMin.value)*4;
   const dateArr = date.value.split("-");
-  const [month, day, year] = dateArr.map(Number); //Read more about maps !
+  const [year, month, day] = dateArr.map(Number);
   store.dispatch("pushTask", {
     color: color.value,
-    date: {year, month, day},
+    date: {year, day, month},
     duration: {start: durationStart, end: durationEnd},
     priority: Number(priority.value),
     status: Number(status.value),
@@ -41,7 +41,10 @@ for (let i = 0; i < 24; i++) {
     <input required type="date" placeholder="date" name="date" v-model="date">
 
     <label for="color">Color</label>
-    <input required type="color" v-model="color">
+    <div class="colorContainer">
+      <input class="colorSelect" required type="color" v-model="color">
+    </div>
+
     
     <label for="startSelect">Duration Start</label>
     <div class="formCell">
@@ -96,7 +99,6 @@ form {
 
 form > * {
   flex: 1;
-  min-height: 20px;
   width: 90%;
 }
 
@@ -135,5 +137,16 @@ label {
 #addOptsContainer {
   display: flex;
   justify-content: space-around;
+}
+
+.colorContainer{
+  display: flex;
+  width: 100px;
+  height: 30px;
+}
+
+.colorSelect{
+  box-sizing: border-box;
+
 }
 </style>

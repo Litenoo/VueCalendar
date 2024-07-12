@@ -19,5 +19,6 @@ import store from '../store';
 #calendar {
   flex: 11;
   padding: 4px;
+  overflow: scroll;
 }
 </style>

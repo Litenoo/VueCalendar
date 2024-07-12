@@ -24,6 +24,15 @@ const store = createStore({
         email: null,
         errorMessage: null,
       },
+      taskCreation: {
+        title : "",
+        date : {day:0, month:0, year:0},
+        color : "",
+        durationStart : {start : 0, end : 0},
+        durationEnd : {start : 0, end : 0},
+        priority : 0,
+        status : 0,
+      },
       tasks: [],
       mouseBtnStatus: false,
       leftBar: true,
@@ -159,16 +168,16 @@ const store = createStore({
       }
       await store.dispatch("fetchTasks");
     },
-    changeDay({state, commit}, num) {
+    async changeDay({state, commit}, num) {
       state.date._day += num;
 
       if (state.date._day < 1) {
-        commit("changeMonth", -1);
+        await store.dispatch("changeMonth", -1);
         let negative = state.date._day;
         state.date._day = (new Date(state.date._year, state.date._month, 0).getDate()) + negative;
       } else if (state.date._day > new Date(state.date._year, state.date._month, 0).getDate()) {
         let excess = state.date._day - new Date(state.date._year, state.date._month, 0).getDate();
-        commit("changeMonth", 1);
+        await store.dispatch("changeMonth", 1);
         state.date._day = excess;
       }
       state.date.display = [];
@@ -182,11 +191,7 @@ const store = createStore({
       }
     },
     //tasks
-    async loadTasks({state}, days){ //used to load tasks from local vuex tasks variable
-
-    },
     async fetchTasks({state}){ //fetches tasks from server
-      console.log('fetching tasks for month :', state.date._month); //dev handle to return next and before month on backend.
       try{
         const rawTasks = await fetch("http://localhost:3000/tasksFetch", {
           method: 'POST',
@@ -203,11 +208,14 @@ const store = createStore({
           }),
         });
         const taskList = await rawTasks.json();
+        state.tasks = taskList;
         console.log("response from fetchTasks :", taskList);
-
       }catch(err){
         console.log(err);
       }
+    },
+    async updateTaskTemp({state}, taskData){
+      state.taskTemp = {taskData};
     },
     async pushTask(state, task){
       console.log("pushing task :", task);
@@ -221,7 +229,7 @@ const store = createStore({
             'Access-Control-Allow-Origin': 'http://localhost:5173',
             'Cookie': 'sameSite=strict',
           },
-          body: JSON.stringify({task}),
+          body: JSON.stringify({task : task}),
         });
       }catch(err){
         console.log(err);

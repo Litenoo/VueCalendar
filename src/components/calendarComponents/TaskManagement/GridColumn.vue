@@ -5,25 +5,9 @@ import store from '../../../store.js';
 
 const props = defineProps({
   day: Object,
-});
-const taskList = ref([]);
-
-const storeTasks = computed(() => {
-  return store.state.tasks;
+  edgeDisplay: Boolean, //true means that days loader is out of current month days and
 });
 
-watch(()=> props.day, (newDay) => { //Make valid also for current month and year
-  taskList.value = [];
-  storeTasks.value.forEach((task) => {
-    if (task.date.day === props.day.value) {
-      taskList.value.push(task);
-    }
-  });
-});
-
-
-let mouseDetect = ref(null);
-let start;
 
 class Task {
   constructor(_startCoord, _endCoord, _title, _color) {
@@ -36,6 +20,37 @@ class Task {
   }
 }
 
+const task = new Task(14, 24, 'Title', '#08CCAA');
+
+const taskList = ref([]);
+
+watch(() => props.day, (newDay) => { //Make valid also for current month and year
+  loadTasks(newDay);
+});
+
+function loadTasks(newDay){
+  taskList.value = [];
+  store.state.tasks.forEach((task) => {
+    // initialising variables to make if statement more readable
+    const isCurrentMonthTask = task.date.day === newDay.day.value &&
+        task.date.month === store.state.date._month &&
+        !props.edgeDisplay;
+
+    const isEdgeMonthTask = task.date.day === newDay.day.value &&
+        task.date.month === store.state.date._month + 1 &&
+        props.edgeDisplay;
+
+    if (isCurrentMonthTask || isEdgeMonthTask) {
+      taskList.value.push(task);
+      console.log("Task: ", task);
+    }
+
+    // console.log("GridColumn day :", newDay.value, "newTask : ", task);
+  })
+}
+let mouseDetect = ref(null);
+let start;
+
 function createTile(startPoint, endPoint) { // handle backend action
   const task = new Task(startPoint, endPoint, 'Title', '#08CCAA');
   taskList.value.push(task);
@@ -43,6 +58,7 @@ function createTile(startPoint, endPoint) { // handle backend action
 }
 
 async function initTask(event) {
+  console.log("Task init")
   const rect = mouseDetect._value.getBoundingClientRect();
   start = Math.floor((event.clientY - rect.top) / 48 * 4);
   createTile(start, 0);
@@ -82,6 +98,8 @@ const mouseMove = (event) => {
     }
   }
 };
+
+loadTasks(props.day);
 </script>
 
 <template>
@@ -114,6 +132,7 @@ const mouseMove = (event) => {
 #taskGrid {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .column div {

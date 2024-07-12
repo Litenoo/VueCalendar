@@ -13,7 +13,11 @@ let weekDaysN = computed(()=> {
   let res = [];
   for(let i = 0; i < 7; i++){
     // console.log("Loop, ", ref(rawData[i]))
-    res.push(ref(rawData[i]));
+    if(rawData.includes(1) && [31, 30, 29].some(arg => rawData.includes(arg))){
+      res.push({day : ref(rawData[i]), isEdge : true});
+    }else{
+      res.push({day : ref(rawData[i]), isEdge : false});
+    }
   }
   store.dispatch("fetchTasks", {days : rawData, month : store.state.date._month});
   return res;
@@ -21,18 +25,17 @@ let weekDaysN = computed(()=> {
 </script>
 
 <template>
-  <div id="gridContainer">
     <div class="columnGrid">
-      <div class="dayName" v-for="(day, index) in weekDaysN">
-        <span class="monthDay">{{ day }}</span>
-        <span class="weekDay">{{ weekDays[index] }}</span>
-      </div>
-    </div>
-    <div id="mainGrid">
       <HoursColumn />
-      <div v-for="day in weekDaysN">
-        <GridColumn :day="day" />
+
+      <div class="dayName" v-for="(day, index) in weekDaysN">
+        <span class="monthDay">{{ day.day }}</span>
+        <span class="weekDay">{{ weekDays[index] }}</span>
+        <GridColumn :day="day" :edgeDisplay="day.isEdge"/>
       </div>
     </div>
-  </div>
 </template>
+
+<style>
+
+</style>
